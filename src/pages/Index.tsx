@@ -85,25 +85,10 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted">
-      {/* Header */}
-      <header className="bg-gradient-to-r from-primary via-accent to-secondary p-4 shadow-lg">
-        <div className="container mx-auto flex items-center justify-between">
-          {userLogo ? (
-            <img src={userLogo} alt="Logo" className="h-12 object-contain" />
-          ) : (
-            <div className="h-12 w-12 bg-background/20 rounded-lg" />
-          )}
-          <h1 className="text-4xl md:text-5xl font-bold text-background text-stroke uppercase tracking-wider">
-            {sport} Box Break
-          </h1>
-          <div className="h-12 w-12" /> {/* Spacer for centering */}
-        </div>
-      </header>
-
+    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted p-2">
       {/* Main Content - 16:9 aspect ratio */}
-      <div className="container mx-auto p-4">
-        <div className="aspect-video bg-card rounded-lg shadow-2xl overflow-hidden border-4 border-primary">
+      <div className="w-full h-screen flex items-center justify-center p-2">
+        <div className="w-full max-w-[98vw] aspect-video bg-card rounded-lg shadow-2xl overflow-hidden border-2 border-primary">
           <div className="h-full flex">
             {/* Team Grid */}
             <div className="flex-1 overflow-auto">
@@ -115,7 +100,7 @@ const Index = () => {
             </div>
 
             {/* Stats Panel */}
-            <div className="w-64 bg-card border-l-4 border-primary">
+            <div className="w-52 bg-card border-l-2 border-primary">
               <StatsPanel
                 totalTeams={teams.length}
                 soldTeams={selectedTeams.length}
