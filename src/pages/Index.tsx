@@ -174,10 +174,10 @@ const Index = () => {
                   href="https://lamberscard.com" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="absolute left-3 bottom-2 flex items-center gap-2 opacity-40 hover:opacity-70 transition-opacity"
+                  className="absolute left-4 bottom-3 flex items-center gap-2 opacity-70 hover:opacity-100 transition-opacity"
                 >
-                  <span className="text-xs text-muted-foreground">fait par</span>
-                  <img src={lambersLogo} alt="Lamberscard" className="h-6" />
+                  <span className="text-sm font-semibold text-foreground">Créé par Lamberscard.com</span>
+                  <img src={lambersLogo} alt="Lamberscard" className="h-8" />
                 </a>
               )}
             </div>
