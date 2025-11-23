@@ -9,7 +9,7 @@ interface TeamGridProps {
 
 export const TeamGrid = ({ teams, selectedTeams, onTeamToggle }: TeamGridProps) => {
   return (
-    <div className="grid grid-cols-6 auto-rows-fr gap-3 p-3 h-full content-start">
+    <div className="grid grid-cols-6 auto-rows-fr gap-x-2 gap-y-1.5 p-3 h-full content-start">
       {teams.map((team) => {
         const isSelected = selectedTeams.includes(team.id);
         return (
@@ -17,8 +17,8 @@ export const TeamGrid = ({ teams, selectedTeams, onTeamToggle }: TeamGridProps) 
             key={team.id}
             onClick={() => onTeamToggle(team.id)}
             className={cn(
-              "relative w-full h-20 rounded overflow-hidden transition-all duration-200",
-              "flex items-center justify-center p-2",
+              "relative w-full h-16 rounded overflow-hidden transition-all duration-200",
+              "flex items-center justify-center p-1.5",
               "border-2 hover:scale-105 active:scale-95",
               isSelected ? "opacity-40 grayscale" : "opacity-100"
             )}
@@ -30,7 +30,7 @@ export const TeamGrid = ({ teams, selectedTeams, onTeamToggle }: TeamGridProps) 
             <img
               src={team.logo}
               alt={team.name}
-              className="max-w-[70%] max-h-[70%] object-contain"
+              className="max-w-[75%] max-h-[75%] object-contain"
             />
             {isSelected && (
               <div className="absolute inset-0 flex items-center justify-center bg-black/70">
