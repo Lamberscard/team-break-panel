@@ -89,9 +89,9 @@ const Index = () => {
       {/* Main Content - 16:9 aspect ratio */}
       <div className="w-full h-screen flex items-center justify-center p-2">
         <div className="w-full max-w-[98vw] aspect-video bg-card rounded-lg shadow-2xl overflow-hidden border-2 border-primary">
-          <div className="h-full flex">
+          <div className="h-full flex flex-col">
             {/* Team Grid */}
-            <div className="flex-1 overflow-auto">
+            <div className="flex-1 overflow-hidden">
               <TeamGrid
                 teams={teams}
                 selectedTeams={selectedTeams}
@@ -100,7 +100,7 @@ const Index = () => {
             </div>
 
             {/* Stats Panel */}
-            <div className="w-52 bg-card border-l-2 border-primary">
+            <div className="bg-card border-t-2 border-primary">
               <StatsPanel
                 totalTeams={teams.length}
                 soldTeams={selectedTeams.length}
