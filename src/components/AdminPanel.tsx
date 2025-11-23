@@ -24,6 +24,8 @@ interface AdminPanelProps {
   onReset: () => void;
   customTeams: Team[];
   onCustomTeamsChange: (teams: Team[]) => void;
+  showLogoBg: boolean;
+  onShowLogoBgChange: (show: boolean) => void;
 }
 
 export const AdminPanel = ({
@@ -36,6 +38,8 @@ export const AdminPanel = ({
   onReset,
   customTeams,
   onCustomTeamsChange,
+  showLogoBg,
+  onShowLogoBgChange,
 }: AdminPanelProps) => {
   const [logoInput, setLogoInput] = useState(userLogo || "");
   const [editingTeam, setEditingTeam] = useState<Team | null>(null);
@@ -121,6 +125,18 @@ export const AdminPanel = ({
                 <img src={userLogo} alt="User logo" className="h-16 object-contain" />
               </div>
             )}
+          </div>
+
+          {/* Logo Background Toggle */}
+          <div className="flex items-center justify-between p-4 border rounded-lg">
+            <div className="space-y-0.5">
+              <Label>Fond noir des logos</Label>
+              <p className="text-sm text-muted-foreground">Afficher un fond noir derrière les logos des équipes</p>
+            </div>
+            <Switch
+              checked={showLogoBg}
+              onCheckedChange={onShowLogoBgChange}
+            />
           </div>
 
           {/* Custom Panels */}

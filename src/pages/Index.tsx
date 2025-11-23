@@ -4,6 +4,7 @@ import { StatsPanel } from "@/components/StatsPanel";
 import { AdminPanel } from "@/components/AdminPanel";
 import { getTeamsBySport, Sport, Team } from "@/data/teams";
 import { useToast } from "@/hooks/use-toast";
+import lambersLogo from "@/assets/lamberscard-logo.png";
 
 interface CustomPanel {
   label: string;
@@ -41,6 +42,11 @@ const Index = () => {
     return saved ? JSON.parse(saved) : [];
   });
 
+  const [showLogoBg, setShowLogoBg] = useState<boolean>(() => {
+    const saved = localStorage.getItem('showLogoBg');
+    return saved ? JSON.parse(saved) : true;
+  });
+
   const defaultTeams = getTeamsBySport(sport);
   const sportCustomTeams = customTeams.filter(t => t.sport === sport);
   const teams = [...defaultTeams, ...sportCustomTeams];
@@ -68,6 +74,10 @@ const Index = () => {
   useEffect(() => {
     localStorage.setItem('customTeams', JSON.stringify(customTeams));
   }, [customTeams]);
+
+  useEffect(() => {
+    localStorage.setItem('showLogoBg', JSON.stringify(showLogoBg));
+  }, [showLogoBg]);
 
   const handleTeamToggle = (teamId: string) => {
     setSelectedTeams(prev => {
@@ -107,16 +117,28 @@ const Index = () => {
                 teams={teams}
                 selectedTeams={selectedTeams}
                 onTeamToggle={handleTeamToggle}
+                showLogoBg={showLogoBg}
               />
             </div>
 
             {/* Stats Panel */}
-            <div className="bg-card border-t-2 border-primary">
+            <div className="bg-card border-t-2 border-primary relative">
               <StatsPanel
                 totalTeams={teams.length}
                 soldTeams={selectedTeams.length}
                 customPanels={customPanels}
               />
+              
+              {/* Lamberscard Branding */}
+              <a 
+                href="https://lamberscard.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="absolute right-3 bottom-2 flex items-center gap-2 opacity-40 hover:opacity-70 transition-opacity"
+              >
+                <span className="text-xs text-muted-foreground">fait par</span>
+                <img src={lambersLogo} alt="Lamberscard" className="h-6" />
+              </a>
             </div>
           </div>
         </div>
@@ -133,6 +155,8 @@ const Index = () => {
         onReset={handleReset}
         customTeams={customTeams}
         onCustomTeamsChange={setCustomTeams}
+        showLogoBg={showLogoBg}
+        onShowLogoBgChange={setShowLogoBg}
       />
     </div>
   );

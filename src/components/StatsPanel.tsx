@@ -36,10 +36,10 @@ export const StatsPanel = ({ totalTeams, soldTeams, customPanels }: StatsPanelPr
 };
 
 const StatCard = ({ label, value, bgColor }: { label: string; value: number; bgColor: string }) => (
-  <div className={cn("rounded-md p-3 flex items-center gap-3", bgColor)}>
-    <span className="font-bold text-sm uppercase tracking-wide text-background">
+  <div className={cn("rounded-md p-4 flex items-center gap-4", bgColor)}>
+    <span className="font-bold text-base uppercase tracking-wide text-background">
       {label}
     </span>
-    <span className="text-2xl font-bold text-background">{value}</span>
+    <span className="text-3xl font-bold text-background">{value}</span>
   </div>
 );
