@@ -51,6 +51,11 @@ const Index = () => {
     return localStorage.getItem('bgColor') || '#212329';
   });
 
+  const [obsMode, setObsMode] = useState<boolean>(() => {
+    const saved = localStorage.getItem('obsMode');
+    return saved ? JSON.parse(saved) : false;
+  });
+
   const defaultTeams = getTeamsBySport(sport);
   const sportCustomTeams = customTeams.filter(t => t.sport === sport);
   const teams = [...defaultTeams, ...sportCustomTeams];
@@ -87,6 +92,10 @@ const Index = () => {
     localStorage.setItem('bgColor', bgColor);
   }, [bgColor]);
 
+  useEffect(() => {
+    localStorage.setItem('obsMode', JSON.stringify(obsMode));
+  }, [obsMode]);
+
   const handleTeamToggle = (teamId: string) => {
     setSelectedTeams(prev => {
       if (prev.includes(teamId)) {
@@ -114,10 +123,16 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen p-2" style={{ backgroundColor: bgColor }}>
+    <div className="min-h-screen" style={{ 
+      backgroundColor: bgColor,
+      padding: obsMode ? '0' : '0.5rem'
+    }}>
       {/* Main Content - 16:9 aspect ratio */}
-      <div className="w-full h-screen flex items-center justify-center p-2">
-        <div className="w-full max-w-[98vw] aspect-video bg-card rounded-lg shadow-2xl overflow-hidden border-2 border-primary">
+      <div className={obsMode ? "w-full h-screen" : "w-full h-screen flex items-center justify-center p-2"}>
+        <div className={obsMode 
+          ? "w-full h-full bg-card" 
+          : "w-full max-w-[98vw] aspect-video bg-card rounded-lg shadow-2xl overflow-hidden border-2 border-primary"
+        }>
           <div className="h-full flex flex-col">
             {/* Team Grid */}
             <div className="flex-1 overflow-hidden">
@@ -130,7 +145,7 @@ const Index = () => {
             </div>
 
             {/* Stats Panel */}
-            <div className="bg-card border-t-2 border-primary relative">
+            <div className={obsMode ? "bg-card relative" : "bg-card border-t-2 border-primary relative"}>
               <StatsPanel
                 totalTeams={teams.length}
                 soldTeams={selectedTeams.length}
@@ -138,36 +153,42 @@ const Index = () => {
               />
               
               {/* Lamberscard Branding */}
-              <a 
-                href="https://lamberscard.com" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="absolute left-3 bottom-2 flex items-center gap-2 opacity-40 hover:opacity-70 transition-opacity"
-              >
-                <span className="text-xs text-muted-foreground">fait par</span>
-                <img src={lambersLogo} alt="Lamberscard" className="h-6" />
-              </a>
+              {!obsMode && (
+                <a 
+                  href="https://lamberscard.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="absolute left-3 bottom-2 flex items-center gap-2 opacity-40 hover:opacity-70 transition-opacity"
+                >
+                  <span className="text-xs text-muted-foreground">fait par</span>
+                  <img src={lambersLogo} alt="Lamberscard" className="h-6" />
+                </a>
+              )}
             </div>
           </div>
         </div>
       </div>
 
       {/* Admin Panel */}
-      <AdminPanel
-        sport={sport}
-        onSportChange={handleSportChange}
-        customPanels={customPanels}
-        onCustomPanelsChange={setCustomPanels}
-        userLogo={userLogo}
-        onUserLogoChange={setUserLogo}
-        onReset={handleReset}
-        customTeams={customTeams}
-        onCustomTeamsChange={setCustomTeams}
-        showLogoBg={showLogoBg}
-        onShowLogoBgChange={setShowLogoBg}
-        bgColor={bgColor}
-        onBgColorChange={setBgColor}
-      />
+      {!obsMode && (
+        <AdminPanel
+          sport={sport}
+          onSportChange={handleSportChange}
+          customPanels={customPanels}
+          onCustomPanelsChange={setCustomPanels}
+          userLogo={userLogo}
+          onUserLogoChange={setUserLogo}
+          onReset={handleReset}
+          customTeams={customTeams}
+          onCustomTeamsChange={setCustomTeams}
+          showLogoBg={showLogoBg}
+          onShowLogoBgChange={setShowLogoBg}
+          bgColor={bgColor}
+          onBgColorChange={setBgColor}
+          obsMode={obsMode}
+          onObsModeChange={setObsMode}
+        />
+      )}
     </div>
   );
 };

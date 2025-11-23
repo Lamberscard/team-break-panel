@@ -28,6 +28,8 @@ interface AdminPanelProps {
   onShowLogoBgChange: (show: boolean) => void;
   bgColor: string;
   onBgColorChange: (color: string) => void;
+  obsMode: boolean;
+  onObsModeChange: (mode: boolean) => void;
 }
 
 export const AdminPanel = ({
@@ -44,6 +46,8 @@ export const AdminPanel = ({
   onShowLogoBgChange,
   bgColor,
   onBgColorChange,
+  obsMode,
+  onObsModeChange,
 }: AdminPanelProps) => {
   const [logoInput, setLogoInput] = useState(userLogo || "");
   const [editingTeam, setEditingTeam] = useState<Team | null>(null);
@@ -161,6 +165,18 @@ export const AdminPanel = ({
                 className="flex-1"
               />
             </div>
+          </div>
+
+          {/* OBS Mode */}
+          <div className="flex items-center justify-between p-4 border rounded-lg bg-primary/10">
+            <div className="space-y-0.5">
+              <Label className="text-primary">Mode OBS / Plein écran</Label>
+              <p className="text-sm text-muted-foreground">Masque les bordures et contrôles pour la capture d'écran</p>
+            </div>
+            <Switch
+              checked={obsMode}
+              onCheckedChange={onObsModeChange}
+            />
           </div>
 
           {/* Custom Panels */}
