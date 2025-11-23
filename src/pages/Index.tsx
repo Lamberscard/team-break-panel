@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { TeamGrid } from "@/components/TeamGrid";
 import { StatsPanel } from "@/components/StatsPanel";
 import { AdminPanel } from "@/components/AdminPanel";
-import { getTeamsBySport, Sport } from "@/data/teams";
+import { getTeamsBySport, Sport, Team } from "@/data/teams";
 import { useToast } from "@/hooks/use-toast";
 
 interface CustomPanel {
@@ -36,7 +36,14 @@ const Index = () => {
     ];
   });
 
-  const teams = getTeamsBySport(sport);
+  const [customTeams, setCustomTeams] = useState<Team[]>(() => {
+    const saved = localStorage.getItem('customTeams');
+    return saved ? JSON.parse(saved) : [];
+  });
+
+  const defaultTeams = getTeamsBySport(sport);
+  const sportCustomTeams = customTeams.filter(t => t.sport === sport);
+  const teams = [...defaultTeams, ...sportCustomTeams];
 
   useEffect(() => {
     localStorage.setItem('breakSport', sport);
@@ -57,6 +64,10 @@ const Index = () => {
   useEffect(() => {
     localStorage.setItem('customPanels', JSON.stringify(customPanels));
   }, [customPanels]);
+
+  useEffect(() => {
+    localStorage.setItem('customTeams', JSON.stringify(customTeams));
+  }, [customTeams]);
 
   const handleTeamToggle = (teamId: string) => {
     setSelectedTeams(prev => {
@@ -120,6 +131,8 @@ const Index = () => {
         userLogo={userLogo}
         onUserLogoChange={setUserLogo}
         onReset={handleReset}
+        customTeams={customTeams}
+        onCustomTeamsChange={setCustomTeams}
       />
     </div>
   );
