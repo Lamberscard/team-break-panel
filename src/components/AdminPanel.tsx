@@ -5,8 +5,8 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Switch } from "@/components/ui/switch";
-import { Settings } from "lucide-react";
-import { Sport } from "@/data/teams";
+import { Settings, Plus, Trash2, Edit } from "lucide-react";
+import { Sport, Team } from "@/data/teams";
 
 interface CustomPanel {
   label: string;
@@ -22,6 +22,8 @@ interface AdminPanelProps {
   userLogo: string | null;
   onUserLogoChange: (logo: string) => void;
   onReset: () => void;
+  customTeams: Team[];
+  onCustomTeamsChange: (teams: Team[]) => void;
 }
 
 export const AdminPanel = ({
@@ -32,13 +34,41 @@ export const AdminPanel = ({
   userLogo,
   onUserLogoChange,
   onReset,
+  customTeams,
+  onCustomTeamsChange,
 }: AdminPanelProps) => {
   const [logoInput, setLogoInput] = useState(userLogo || "");
+  const [editingTeam, setEditingTeam] = useState<Team | null>(null);
+  const [newTeam, setNewTeam] = useState({ name: "", logo: "", color: "#000000" });
 
   const updatePanel = (index: number, updates: Partial<CustomPanel>) => {
     const newPanels = [...customPanels];
     newPanels[index] = { ...newPanels[index], ...updates };
     onCustomPanelsChange(newPanels);
+  };
+
+  const addCustomTeam = () => {
+    if (newTeam.name && newTeam.logo) {
+      const team: Team = {
+        id: `custom-${Date.now()}`,
+        name: newTeam.name,
+        logo: newTeam.logo,
+        color: newTeam.color,
+        sport: sport,
+      };
+      onCustomTeamsChange([...customTeams, team]);
+      setNewTeam({ name: "", logo: "", color: "#000000" });
+    }
+  };
+
+  const updateCustomTeam = (team: Team) => {
+    const updatedTeams = customTeams.map(t => t.id === team.id ? team : t);
+    onCustomTeamsChange(updatedTeams);
+    setEditingTeam(null);
+  };
+
+  const deleteCustomTeam = (teamId: string) => {
+    onCustomTeamsChange(customTeams.filter(t => t.id !== teamId));
   };
 
   return (
@@ -127,6 +157,102 @@ export const AdminPanel = ({
                     />
                   </div>
                 </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Custom Teams */}
+          <div className="space-y-4">
+            <Label className="text-lg">Équipes Personnalisées</Label>
+            
+            {/* Add New Team */}
+            <div className="p-4 border rounded-lg space-y-3 bg-muted/50">
+              <Label>Ajouter une nouvelle équipe</Label>
+              <div className="space-y-2">
+                <Input
+                  placeholder="Nom de l'équipe"
+                  value={newTeam.name}
+                  onChange={(e) => setNewTeam({ ...newTeam, name: e.target.value })}
+                />
+                <Input
+                  placeholder="URL du logo"
+                  value={newTeam.logo}
+                  onChange={(e) => setNewTeam({ ...newTeam, logo: e.target.value })}
+                />
+                <div className="flex gap-2 items-center">
+                  <Input
+                    type="color"
+                    value={newTeam.color}
+                    onChange={(e) => setNewTeam({ ...newTeam, color: e.target.value })}
+                    className="w-20 h-10"
+                  />
+                  <span className="text-sm text-muted-foreground">Couleur principale</span>
+                </div>
+                <Button onClick={addCustomTeam} className="w-full" size="sm">
+                  <Plus className="w-4 h-4 mr-2" />
+                  Ajouter
+                </Button>
+              </div>
+            </div>
+
+            {/* List Custom Teams */}
+            {customTeams.filter(t => t.sport === sport).map((team) => (
+              <div key={team.id} className="p-4 border rounded-lg space-y-3">
+                {editingTeam?.id === team.id ? (
+                  <div className="space-y-2">
+                    <Input
+                      value={editingTeam.name}
+                      onChange={(e) => setEditingTeam({ ...editingTeam, name: e.target.value })}
+                    />
+                    <Input
+                      value={editingTeam.logo}
+                      onChange={(e) => setEditingTeam({ ...editingTeam, logo: e.target.value })}
+                    />
+                    <div className="flex gap-2 items-center">
+                      <Input
+                        type="color"
+                        value={editingTeam.color}
+                        onChange={(e) => setEditingTeam({ ...editingTeam, color: e.target.value })}
+                        className="w-20 h-10"
+                      />
+                    </div>
+                    <div className="flex gap-2">
+                      <Button onClick={() => updateCustomTeam(editingTeam)} size="sm" className="flex-1">
+                        Sauvegarder
+                      </Button>
+                      <Button onClick={() => setEditingTeam(null)} size="sm" variant="outline" className="flex-1">
+                        Annuler
+                      </Button>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <img src={team.logo} alt={team.name} className="w-10 h-10 object-contain" />
+                      <span className="font-semibold">{team.name}</span>
+                      <div
+                        className="w-6 h-6 rounded border"
+                        style={{ backgroundColor: team.color }}
+                      />
+                    </div>
+                    <div className="flex gap-2">
+                      <Button
+                        size="icon"
+                        variant="outline"
+                        onClick={() => setEditingTeam(team)}
+                      >
+                        <Edit className="w-4 h-4" />
+                      </Button>
+                      <Button
+                        size="icon"
+                        variant="destructive"
+                        onClick={() => deleteCustomTeam(team.id)}
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </Button>
+                    </div>
+                  </div>
+                )}
               </div>
             ))}
           </div>

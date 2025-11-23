@@ -3,6 +3,7 @@ export interface Team {
   name: string;
   logo: string;
   color: string;
+  sport?: Sport;
 }
 
 export const NBA_TEAMS: Team[] = [
