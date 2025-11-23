@@ -5,9 +5,10 @@ interface TeamGridProps {
   teams: Team[];
   selectedTeams: string[];
   onTeamToggle: (teamId: string) => void;
+  showLogoBg: boolean;
 }
 
-export const TeamGrid = ({ teams, selectedTeams, onTeamToggle }: TeamGridProps) => {
+export const TeamGrid = ({ teams, selectedTeams, onTeamToggle, showLogoBg }: TeamGridProps) => {
   return (
     <div className="grid grid-cols-8 gap-1.5 p-2 h-full content-center">
       {teams.map((team) => {
@@ -24,7 +25,7 @@ export const TeamGrid = ({ teams, selectedTeams, onTeamToggle }: TeamGridProps) 
             )}
             style={{
               borderColor: team.color,
-              backgroundColor: 'rgba(0, 0, 0, 0.6)',
+              backgroundColor: showLogoBg ? 'rgba(0, 0, 0, 0.6)' : 'transparent',
               borderWidth: '3px'
             }}
           >
