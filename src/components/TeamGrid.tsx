@@ -9,7 +9,7 @@ interface TeamGridProps {
 
 export const TeamGrid = ({ teams, selectedTeams, onTeamToggle }: TeamGridProps) => {
   return (
-    <div className="grid grid-cols-6 gap-2 p-4">
+    <div className="grid grid-cols-6 gap-1.5 p-2">
       {teams.map((team) => {
         const isSelected = selectedTeams.includes(team.id);
         return (
@@ -17,14 +17,15 @@ export const TeamGrid = ({ teams, selectedTeams, onTeamToggle }: TeamGridProps) 
             key={team.id}
             onClick={() => onTeamToggle(team.id)}
             className={cn(
-              "relative aspect-square rounded-lg overflow-hidden transition-all duration-200",
-              "flex items-center justify-center p-2",
-              "border-4 hover:scale-105 active:scale-95",
+              "relative aspect-square rounded-md overflow-hidden transition-all duration-200",
+              "flex items-center justify-center p-1.5",
+              "border-3 hover:scale-105 active:scale-95",
               isSelected ? "opacity-40 grayscale" : "opacity-100"
             )}
             style={{
               borderColor: team.color,
               backgroundColor: 'rgba(0, 0, 0, 0.6)',
+              borderWidth: '3px'
             }}
           >
             <img
