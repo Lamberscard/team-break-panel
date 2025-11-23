@@ -4,6 +4,7 @@ import { StatsPanel } from "@/components/StatsPanel";
 import { AdminPanel } from "@/components/AdminPanel";
 import { getTeamsBySport, Sport, Team } from "@/data/teams";
 import { useToast } from "@/hooks/use-toast";
+import { Button } from "@/components/ui/button";
 import lambersLogo from "@/assets/lamberscard-logo.png";
 
 interface CustomPanel {
@@ -95,6 +96,21 @@ const Index = () => {
   useEffect(() => {
     localStorage.setItem('obsMode', JSON.stringify(obsMode));
   }, [obsMode]);
+
+  useEffect(() => {
+    const handleKeyPress = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && obsMode) {
+        setObsMode(false);
+        toast({
+          title: "Mode OBS désactivé",
+          description: "Vous pouvez maintenant accéder aux contrôles.",
+        });
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyPress);
+    return () => window.removeEventListener('keydown', handleKeyPress);
+  }, [obsMode, toast]);
 
   const handleTeamToggle = (teamId: string) => {
     setSelectedTeams(prev => {
@@ -188,6 +204,24 @@ const Index = () => {
           obsMode={obsMode}
           onObsModeChange={setObsMode}
         />
+      )}
+
+      {/* Exit OBS Mode Button */}
+      {obsMode && (
+        <Button
+          size="sm"
+          variant="outline"
+          onClick={() => {
+            setObsMode(false);
+            toast({
+              title: "Mode OBS désactivé",
+              description: "Vous pouvez maintenant accéder aux contrôles.",
+            });
+          }}
+          className="fixed top-4 right-4 z-50 opacity-20 hover:opacity-100 transition-opacity bg-muted/50 backdrop-blur-sm"
+        >
+          Quitter mode OBS (ESC)
+        </Button>
       )}
     </div>
   );
