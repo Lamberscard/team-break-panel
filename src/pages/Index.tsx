@@ -91,7 +91,7 @@ const Index = () => {
         <div className="w-full max-w-[98vw] aspect-video bg-card rounded-lg shadow-2xl overflow-hidden border-2 border-primary">
           <div className="h-full flex">
             {/* Team Grid */}
-            <div className="flex-1 overflow-auto">
+            <div className="flex-1 overflow-hidden">
               <TeamGrid
                 teams={teams}
                 selectedTeams={selectedTeams}
