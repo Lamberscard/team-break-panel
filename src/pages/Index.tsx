@@ -47,6 +47,10 @@ const Index = () => {
     return saved ? JSON.parse(saved) : true;
   });
 
+  const [bgColor, setBgColor] = useState<string>(() => {
+    return localStorage.getItem('bgColor') || '#212329';
+  });
+
   const defaultTeams = getTeamsBySport(sport);
   const sportCustomTeams = customTeams.filter(t => t.sport === sport);
   const teams = [...defaultTeams, ...sportCustomTeams];
@@ -79,6 +83,10 @@ const Index = () => {
     localStorage.setItem('showLogoBg', JSON.stringify(showLogoBg));
   }, [showLogoBg]);
 
+  useEffect(() => {
+    localStorage.setItem('bgColor', bgColor);
+  }, [bgColor]);
+
   const handleTeamToggle = (teamId: string) => {
     setSelectedTeams(prev => {
       if (prev.includes(teamId)) {
@@ -106,7 +114,7 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted p-2">
+    <div className="min-h-screen p-2" style={{ backgroundColor: bgColor }}>
       {/* Main Content - 16:9 aspect ratio */}
       <div className="w-full h-screen flex items-center justify-center p-2">
         <div className="w-full max-w-[98vw] aspect-video bg-card rounded-lg shadow-2xl overflow-hidden border-2 border-primary">
@@ -134,7 +142,7 @@ const Index = () => {
                 href="https://lamberscard.com" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="absolute right-3 bottom-2 flex items-center gap-2 opacity-40 hover:opacity-70 transition-opacity"
+                className="absolute left-3 bottom-2 flex items-center gap-2 opacity-40 hover:opacity-70 transition-opacity"
               >
                 <span className="text-xs text-muted-foreground">fait par</span>
                 <img src={lambersLogo} alt="Lamberscard" className="h-6" />
@@ -157,6 +165,8 @@ const Index = () => {
         onCustomTeamsChange={setCustomTeams}
         showLogoBg={showLogoBg}
         onShowLogoBgChange={setShowLogoBg}
+        bgColor={bgColor}
+        onBgColorChange={setBgColor}
       />
     </div>
   );

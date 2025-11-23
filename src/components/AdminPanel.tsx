@@ -26,6 +26,8 @@ interface AdminPanelProps {
   onCustomTeamsChange: (teams: Team[]) => void;
   showLogoBg: boolean;
   onShowLogoBgChange: (show: boolean) => void;
+  bgColor: string;
+  onBgColorChange: (color: string) => void;
 }
 
 export const AdminPanel = ({
@@ -40,6 +42,8 @@ export const AdminPanel = ({
   onCustomTeamsChange,
   showLogoBg,
   onShowLogoBgChange,
+  bgColor,
+  onBgColorChange,
 }: AdminPanelProps) => {
   const [logoInput, setLogoInput] = useState(userLogo || "");
   const [editingTeam, setEditingTeam] = useState<Team | null>(null);
@@ -137,6 +141,26 @@ export const AdminPanel = ({
               checked={showLogoBg}
               onCheckedChange={onShowLogoBgChange}
             />
+          </div>
+
+          {/* Background Color */}
+          <div className="space-y-2">
+            <Label>Couleur de fond</Label>
+            <div className="flex gap-2 items-center">
+              <Input
+                type="color"
+                value={bgColor}
+                onChange={(e) => onBgColorChange(e.target.value)}
+                className="w-20 h-10"
+              />
+              <Input
+                type="text"
+                value={bgColor}
+                onChange={(e) => onBgColorChange(e.target.value)}
+                placeholder="#212329"
+                className="flex-1"
+              />
+            </div>
           </div>
 
           {/* Custom Panels */}
