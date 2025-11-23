@@ -21,7 +21,9 @@ export const TeamGrid = ({ teams, selectedTeams, onTeamToggle, showLogoBg }: Tea
               "relative aspect-square rounded-md overflow-hidden transition-all duration-200",
               "flex items-center justify-center p-1.5",
               "border-3 hover:scale-105 active:scale-95",
-              isSelected ? "opacity-40 grayscale" : "opacity-100"
+              isSelected 
+                ? "opacity-40 grayscale" 
+                : "opacity-100 hover:animate-glow-pulse animate-select-flash"
             )}
             style={{
               borderColor: team.color,
