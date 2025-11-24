@@ -45,9 +45,9 @@ const Index = () => {
     return saved ? JSON.parse(saved) : [];
   });
 
-  const [showLogoBg, setShowLogoBg] = useState<boolean>(() => {
-    const saved = localStorage.getItem('showLogoBg');
-    return saved ? JSON.parse(saved) : true;
+  const [logoBgColor, setLogoBgColor] = useState<'black' | 'white' | 'transparent'>(() => {
+    const saved = localStorage.getItem('logoBgColor');
+    return (saved as 'black' | 'white' | 'transparent') || 'black';
   });
 
   const [bgColor, setBgColor] = useState<string>(() => {
@@ -115,8 +115,8 @@ const Index = () => {
   }, [customTeams]);
 
   useEffect(() => {
-    localStorage.setItem('showLogoBg', JSON.stringify(showLogoBg));
-  }, [showLogoBg]);
+    localStorage.setItem('logoBgColor', logoBgColor);
+  }, [logoBgColor]);
 
   useEffect(() => {
     localStorage.setItem('bgColor', bgColor);
@@ -225,7 +225,7 @@ const Index = () => {
                 teams={teams}
                 selectedTeams={selectedTeams}
                 onTeamToggle={handleTeamToggle}
-                showLogoBg={showLogoBg}
+                logoBgColor={logoBgColor}
               />
             </div>
 
@@ -266,8 +266,8 @@ const Index = () => {
           onReset={handleReset}
           customTeams={customTeams}
           onCustomTeamsChange={setCustomTeams}
-          showLogoBg={showLogoBg}
-          onShowLogoBgChange={setShowLogoBg}
+          logoBgColor={logoBgColor}
+          onLogoBgColorChange={setLogoBgColor}
           bgColor={bgColor}
           onBgColorChange={setBgColor}
           obsMode={obsMode}
