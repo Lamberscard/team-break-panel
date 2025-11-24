@@ -14,36 +14,42 @@ const colorPresets = {
     name: "Défaut",
     bgColor: "#212329",
     gridBgColor: "#1a1d23",
+    borderColor: "#00bfff",
     icon: "⚫"
   },
   cyberpunk: {
     name: "Cyberpunk",
     bgColor: "#0a0e27",
     gridBgColor: "transparent",
+    borderColor: "#ff00ff",
     icon: "🌆"
   },
   ocean: {
     name: "Océan",
     bgColor: "#001f3f",
     gridBgColor: "rgba(0, 31, 63, 0.7)",
+    borderColor: "#00d4ff",
     icon: "🌊"
   },
   fire: {
     name: "Feu",
     bgColor: "#1a0a00",
     gridBgColor: "rgba(51, 17, 0, 0.7)",
+    borderColor: "#ff4500",
     icon: "🔥"
   },
   forest: {
     name: "Forêt",
     bgColor: "#0d1f0d",
     gridBgColor: "rgba(13, 31, 13, 0.8)",
+    borderColor: "#32cd32",
     icon: "🌲"
   },
   neon: {
     name: "Néon",
     bgColor: "#1a001a",
     gridBgColor: "transparent",
+    borderColor: "#ff1493",
     icon: "💜"
   }
 };
@@ -74,6 +80,8 @@ interface AdminPanelProps {
   onBannerLogoChange: (logo: string) => void;
   gridBgColor: string;
   onGridBgColorChange: (color: string) => void;
+  borderColor: string;
+  onBorderColorChange: (color: string) => void;
   showAnimation: boolean;
   onShowAnimationChange: (show: boolean) => void;
   animationIntensity: number;
@@ -100,6 +108,8 @@ export const AdminPanel = ({
   onBannerLogoChange,
   gridBgColor,
   onGridBgColorChange,
+  borderColor,
+  onBorderColorChange,
   showAnimation,
   onShowAnimationChange,
   animationIntensity,
@@ -144,6 +154,7 @@ export const AdminPanel = ({
     const preset = colorPresets[presetKey];
     onBgColorChange(preset.bgColor);
     onGridBgColorChange(preset.gridBgColor);
+    onBorderColorChange(preset.borderColor);
   };
 
   return (
@@ -152,7 +163,8 @@ export const AdminPanel = ({
         <Button
           size="icon"
           variant="outline"
-          className="fixed bottom-4 right-4 w-14 h-14 rounded-full shadow-lg z-50 bg-primary hover:bg-primary/90"
+          className="fixed bottom-4 right-4 w-14 h-14 rounded-full shadow-lg z-50 hover:bg-primary/90"
+          style={{ backgroundColor: borderColor, borderColor: borderColor }}
         >
           <Settings className="w-6 h-6" />
         </Button>
@@ -326,6 +338,26 @@ export const AdminPanel = ({
                 value={gridBgColor}
                 onChange={(e) => onGridBgColorChange(e.target.value)}
                 placeholder="#1a1d23 ou transparent"
+                className="flex-1"
+              />
+            </div>
+          </div>
+
+          {/* Border Color */}
+          <div className="space-y-2">
+            <Label>Couleur du contour</Label>
+            <div className="flex gap-2 items-center">
+              <Input
+                type="color"
+                value={borderColor}
+                onChange={(e) => onBorderColorChange(e.target.value)}
+                className="w-20 h-10"
+              />
+              <Input
+                type="text"
+                value={borderColor}
+                onChange={(e) => onBorderColorChange(e.target.value)}
+                placeholder="#00bfff"
                 className="flex-1"
               />
             </div>
