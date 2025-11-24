@@ -30,6 +30,10 @@ interface AdminPanelProps {
   onBgColorChange: (color: string) => void;
   obsMode: boolean;
   onObsModeChange: (mode: boolean) => void;
+  bannerLogo: string | null;
+  onBannerLogoChange: (logo: string) => void;
+  gridBgColor: string;
+  onGridBgColorChange: (color: string) => void;
 }
 
 export const AdminPanel = ({
@@ -48,8 +52,13 @@ export const AdminPanel = ({
   onBgColorChange,
   obsMode,
   onObsModeChange,
+  bannerLogo,
+  onBannerLogoChange,
+  gridBgColor,
+  onGridBgColorChange,
 }: AdminPanelProps) => {
   const [logoInput, setLogoInput] = useState(userLogo || "");
+  const [bannerInput, setBannerInput] = useState(bannerLogo || "");
   const [editingTeam, setEditingTeam] = useState<Team | null>(null);
   const [newTeam, setNewTeam] = useState({ name: "", logo: "", color: "#000000" });
 
@@ -147,9 +156,29 @@ export const AdminPanel = ({
             />
           </div>
 
+          {/* Banner Logo */}
+          <div className="space-y-2">
+            <Label>Logo bannière (970x90px recommandé)</Label>
+            <div className="flex gap-2">
+              <Input
+                value={bannerInput}
+                onChange={(e) => setBannerInput(e.target.value)}
+                placeholder="https://example.com/banner.png"
+              />
+              <Button onClick={() => onBannerLogoChange(bannerInput)}>
+                Save
+              </Button>
+            </div>
+            {bannerLogo && (
+              <div className="mt-2 p-2 bg-muted rounded-lg">
+                <img src={bannerLogo} alt="Banner logo" className="h-[90px] w-auto max-w-full object-contain" />
+              </div>
+            )}
+          </div>
+
           {/* Background Color */}
           <div className="space-y-2">
-            <Label>Couleur de fond</Label>
+            <Label>Couleur de fond extérieur</Label>
             <div className="flex gap-2 items-center">
               <Input
                 type="color"
@@ -162,6 +191,26 @@ export const AdminPanel = ({
                 value={bgColor}
                 onChange={(e) => onBgColorChange(e.target.value)}
                 placeholder="#212329"
+                className="flex-1"
+              />
+            </div>
+          </div>
+
+          {/* Grid Background Color */}
+          <div className="space-y-2">
+            <Label>Couleur de fond du tableau</Label>
+            <div className="flex gap-2 items-center">
+              <Input
+                type="color"
+                value={gridBgColor}
+                onChange={(e) => onGridBgColorChange(e.target.value)}
+                className="w-20 h-10"
+              />
+              <Input
+                type="text"
+                value={gridBgColor}
+                onChange={(e) => onGridBgColorChange(e.target.value)}
+                placeholder="#1a1d23"
                 className="flex-1"
               />
             </div>
