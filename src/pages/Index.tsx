@@ -6,6 +6,7 @@ import { AnimatedBackground } from "@/components/AnimatedBackground";
 import { getTeamsBySport, Sport, Team } from "@/data/teams";
 import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
+import { X } from "lucide-react";
 import lambersLogo from "@/assets/lamberscard-logo.png";
 
 interface CustomPanel {
@@ -289,7 +290,7 @@ const Index = () => {
       {/* Exit OBS Mode Button */}
       {obsMode && (
         <Button
-          size="sm"
+          size="icon"
           variant="outline"
           onClick={() => {
             setObsMode(false);
@@ -298,9 +299,9 @@ const Index = () => {
               description: "Vous pouvez maintenant accéder aux contrôles.",
             });
           }}
-          className="fixed top-4 right-4 z-50 opacity-20 hover:opacity-100 transition-opacity bg-muted/50 backdrop-blur-sm"
+          className="fixed top-4 right-4 z-50 opacity-20 hover:opacity-100 transition-opacity bg-muted/50 backdrop-blur-sm w-8 h-8"
         >
-          Quitter mode OBS (ESC)
+          <X className="w-4 h-4" />
         </Button>
       )}
     </div>
