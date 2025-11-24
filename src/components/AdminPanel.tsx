@@ -88,6 +88,10 @@ interface AdminPanelProps {
   onAnimationIntensityChange: (intensity: number) => void;
   showSmoothElements: boolean;
   onShowSmoothElementsChange: (show: boolean) => void;
+  gradientColor1: string;
+  onGradientColor1Change: (color: string) => void;
+  gradientColor2: string;
+  onGradientColor2Change: (color: string) => void;
 }
 
 export const AdminPanel = ({
@@ -118,6 +122,10 @@ export const AdminPanel = ({
   onAnimationIntensityChange,
   showSmoothElements,
   onShowSmoothElementsChange,
+  gradientColor1,
+  onGradientColor1Change,
+  gradientColor2,
+  onGradientColor2Change,
 }: AdminPanelProps) => {
   const [logoInput, setLogoInput] = useState(userLogo || "");
   const [bannerInput, setBannerInput] = useState(bannerLogo || "");
@@ -300,6 +308,49 @@ export const AdminPanel = ({
                 checked={showSmoothElements}
                 onCheckedChange={onShowSmoothElementsChange}
               />
+            </div>
+          )}
+
+          {/* Gradient Colors */}
+          {showAnimation && (
+            <div className="space-y-3 p-4 border rounded-lg">
+              <Label>Couleurs du Gradient</Label>
+              <div className="grid grid-cols-2 gap-3">
+                <div className="space-y-2">
+                  <Label className="text-sm">Couleur 1</Label>
+                  <div className="flex gap-2">
+                    <Input
+                      type="color"
+                      value={gradientColor1}
+                      onChange={(e) => onGradientColor1Change(e.target.value)}
+                      className="w-16 h-10 p-1 cursor-pointer"
+                    />
+                    <Input
+                      type="text"
+                      value={gradientColor1}
+                      onChange={(e) => onGradientColor1Change(e.target.value)}
+                      className="flex-1"
+                    />
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <Label className="text-sm">Couleur 2</Label>
+                  <div className="flex gap-2">
+                    <Input
+                      type="color"
+                      value={gradientColor2}
+                      onChange={(e) => onGradientColor2Change(e.target.value)}
+                      className="w-16 h-10 p-1 cursor-pointer"
+                    />
+                    <Input
+                      type="text"
+                      value={gradientColor2}
+                      onChange={(e) => onGradientColor2Change(e.target.value)}
+                      className="flex-1"
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
           )}
 

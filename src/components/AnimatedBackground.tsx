@@ -3,9 +3,11 @@ import { useMemo } from "react";
 interface AnimatedBackgroundProps {
   intensity: number;
   showSmoothElements?: boolean;
+  gradientColor1?: string;
+  gradientColor2?: string;
 }
 
-export const AnimatedBackground = ({ intensity = 2, showSmoothElements = false }: AnimatedBackgroundProps) => {
+export const AnimatedBackground = ({ intensity = 2, showSmoothElements = false, gradientColor1 = '#00bfff', gradientColor2 = '#ff00ff' }: AnimatedBackgroundProps) => {
   // Adjust opacity and size based on intensity (1: subtle, 2: moderate, 3: intense)
   const opacityMultiplier = intensity === 1 ? 0.6 : intensity === 2 ? 1 : 1.4;
   const sizeMultiplier = intensity === 1 ? 0.8 : intensity === 2 ? 1 : 1.3;
@@ -23,37 +25,51 @@ export const AnimatedBackground = ({ intensity = 2, showSmoothElements = false }
     }));
   }, [intensity]);
   
+  // Convert hex to rgba
+  const hexToRgba = (hex: string, alpha: number) => {
+    const r = parseInt(hex.slice(1, 3), 16);
+    const g = parseInt(hex.slice(3, 5), 16);
+    const b = parseInt(hex.slice(5, 7), 16);
+    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+  };
+
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
       {/* Gradient animé principal - plus intense */}
       <div 
-        className="absolute inset-0 bg-gradient-to-br from-primary/25 via-transparent to-secondary/25" 
-        style={{ opacity: 0.7 * opacityMultiplier }}
+        className="absolute inset-0" 
+        style={{ 
+          background: `linear-gradient(135deg, ${hexToRgba(gradientColor1, 0.25)}, transparent, ${hexToRgba(gradientColor2, 0.25)})`,
+          opacity: 0.7 * opacityMultiplier 
+        }}
       />
       
       {/* Cercles flottants - plus visibles */}
       <div 
-        className="absolute top-1/4 left-1/4 bg-primary/20 rounded-full blur-3xl animate-float-slow"
+        className="absolute top-1/4 left-1/4 rounded-full blur-3xl animate-float-slow"
         style={{ 
           width: `${120 * sizeMultiplier}px`, 
           height: `${120 * sizeMultiplier}px`,
-          opacity: 0.8 * opacityMultiplier 
+          opacity: 0.8 * opacityMultiplier,
+          backgroundColor: hexToRgba(gradientColor1, 0.2)
         }}
       />
       <div 
-        className="absolute bottom-1/4 right-1/4 bg-secondary/20 rounded-full blur-3xl animate-float-delayed"
+        className="absolute bottom-1/4 right-1/4 rounded-full blur-3xl animate-float-delayed"
         style={{ 
           width: `${100 * sizeMultiplier}px`, 
           height: `${100 * sizeMultiplier}px`,
-          opacity: 0.8 * opacityMultiplier 
+          opacity: 0.8 * opacityMultiplier,
+          backgroundColor: hexToRgba(gradientColor2, 0.2)
         }}
       />
       <div 
-        className="absolute top-1/2 right-1/3 bg-accent/15 rounded-full blur-2xl animate-float-fast"
+        className="absolute top-1/2 right-1/3 rounded-full blur-2xl animate-float-fast"
         style={{ 
           width: `${80 * sizeMultiplier}px`, 
           height: `${80 * sizeMultiplier}px`,
-          opacity: 0.7 * opacityMultiplier
+          opacity: 0.7 * opacityMultiplier,
+          backgroundColor: hexToRgba(gradientColor1, 0.15)
         }}
       />
       
