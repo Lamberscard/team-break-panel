@@ -10,7 +10,7 @@ interface TeamGridProps {
 
 export const TeamGrid = ({ teams, selectedTeams, onTeamToggle, showLogoBg }: TeamGridProps) => {
   return (
-    <div className="grid grid-cols-8 gap-1 p-2 h-full content-center">
+    <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10 xl:grid-cols-12 gap-1 p-2 h-full content-center">
       {teams.map((team) => {
         const isSelected = selectedTeams.includes(team.id);
         return (
