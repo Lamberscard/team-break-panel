@@ -76,6 +76,10 @@ const Index = () => {
     return saved ? parseInt(saved) : 2;
   });
 
+  const [borderColor, setBorderColor] = useState<string>(() => {
+    return localStorage.getItem('borderColor') || '#00bfff';
+  });
+
   const defaultTeams = getTeamsBySport(sport);
   const sportCustomTeams = customTeams.filter(t => t.sport === sport);
   const teams = [...defaultTeams, ...sportCustomTeams];
@@ -137,6 +141,10 @@ const Index = () => {
   }, [animationIntensity]);
 
   useEffect(() => {
+    localStorage.setItem('borderColor', borderColor);
+  }, [borderColor]);
+
+  useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
       if (e.key === 'Escape' && obsMode) {
         setObsMode(false);
@@ -186,10 +194,13 @@ const Index = () => {
       
       {/* Main Content - 16:9 aspect ratio */}
       <div className={obsMode ? "w-full h-screen relative z-10" : "w-full h-screen flex items-center justify-center p-2 relative z-10"}>
-        <div className={obsMode 
-          ? "w-full h-full bg-card/95 backdrop-blur-sm" 
-          : "w-full max-w-[98vw] aspect-video bg-card/95 backdrop-blur-sm rounded-lg shadow-2xl overflow-hidden border-2 border-primary"
-        }>
+        <div 
+          className={obsMode 
+            ? "w-full h-full bg-card/95 backdrop-blur-sm" 
+            : "w-full max-w-[98vw] aspect-video bg-card/95 backdrop-blur-sm rounded-lg shadow-2xl overflow-hidden border-2"
+          }
+          style={!obsMode ? { borderColor: borderColor } : {}}
+        >
           <div className="h-full flex flex-col relative">
             {/* Banner Logo */}
             {bannerLogo && (
@@ -209,7 +220,7 @@ const Index = () => {
             </div>
 
             {/* Stats Panel */}
-            <div className={obsMode ? "bg-card relative" : "bg-card border-t-2 border-primary relative"}>
+            <div className={obsMode ? "bg-card relative" : "bg-card border-t-2 relative"} style={!obsMode ? { borderColor: borderColor } : {}}>
               <StatsPanel
                 totalTeams={teams.length}
                 soldTeams={selectedTeams.length}
@@ -255,6 +266,8 @@ const Index = () => {
           onBannerLogoChange={setBannerLogo}
           gridBgColor={gridBgColor}
           onGridBgColorChange={setGridBgColor}
+          borderColor={borderColor}
+          onBorderColorChange={setBorderColor}
           showAnimation={showAnimation}
           onShowAnimationChange={setShowAnimation}
           animationIntensity={animationIntensity}
