@@ -5,10 +5,17 @@ interface TeamGridProps {
   teams: Team[];
   selectedTeams: string[];
   onTeamToggle: (teamId: string) => void;
-  showLogoBg: boolean;
+  logoBgColor: 'black' | 'white' | 'transparent';
 }
 
-export const TeamGrid = ({ teams, selectedTeams, onTeamToggle, showLogoBg }: TeamGridProps) => {
+export const TeamGrid = ({ teams, selectedTeams, onTeamToggle, logoBgColor }: TeamGridProps) => {
+  const getBgColor = () => {
+    switch (logoBgColor) {
+      case 'black': return 'rgba(0, 0, 0, 0.7)';
+      case 'white': return 'rgba(255, 255, 255, 0.7)';
+      default: return 'transparent';
+    }
+  };
   return (
     <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10 xl:grid-cols-12 gap-1 p-2 h-full content-center">
       {teams.map((team) => {
@@ -27,7 +34,7 @@ export const TeamGrid = ({ teams, selectedTeams, onTeamToggle, showLogoBg }: Tea
               )}
               style={{
                 borderColor: team.color,
-                backgroundColor: showLogoBg ? 'rgba(0, 0, 0, 0.6)' : 'transparent',
+                backgroundColor: getBgColor(),
                 borderWidth: '2px'
               }}
             >

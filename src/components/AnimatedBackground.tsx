@@ -8,37 +8,67 @@ export const AnimatedBackground = ({ intensity = 2, showSmoothElements = false }
   const opacityMultiplier = intensity === 1 ? 0.6 : intensity === 2 ? 1 : 1.4;
   const sizeMultiplier = intensity === 1 ? 0.8 : intensity === 2 ? 1 : 1.3;
   
+  // Generate stars positions (more stars for higher intensity)
+  const starsCount = intensity * 50;
+  const stars = Array.from({ length: starsCount }).map((_, i) => ({
+    id: i,
+    x: Math.random() * 100,
+    y: Math.random() * 100,
+    size: Math.random() * 2 + 1,
+    opacity: Math.random() * 0.8 + 0.2,
+    duration: Math.random() * 3 + 2,
+  }));
+  
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {/* Gradient animé principal */}
+      {/* Space stars effect */}
+      <div className="absolute inset-0">
+        {stars.map(star => (
+          <div
+            key={star.id}
+            className="absolute rounded-full bg-white animate-pulse"
+            style={{
+              left: `${star.x}%`,
+              top: `${star.y}%`,
+              width: `${star.size}px`,
+              height: `${star.size}px`,
+              opacity: star.opacity * opacityMultiplier,
+              animation: `pulse ${star.duration}s ease-in-out infinite`,
+              boxShadow: `0 0 ${star.size * 2}px rgba(255, 255, 255, ${star.opacity})`
+            }}
+          />
+        ))}
+      </div>
+      
+      {/* Gradient animé principal - plus intense */}
       <div 
-        className="absolute inset-0 bg-gradient-to-br from-primary/15 via-transparent to-secondary/15" 
-        style={{ opacity: 0.5 * opacityMultiplier }}
+        className="absolute inset-0 bg-gradient-to-br from-primary/25 via-transparent to-secondary/25" 
+        style={{ opacity: 0.7 * opacityMultiplier }}
       />
       
-      {/* Cercles flottants */}
+      {/* Cercles flottants - plus visibles */}
       <div 
-        className="absolute top-1/4 left-1/4 bg-primary/10 rounded-full blur-3xl animate-float-slow"
+        className="absolute top-1/4 left-1/4 bg-primary/20 rounded-full blur-3xl animate-float-slow"
         style={{ 
-          width: `${96 * sizeMultiplier}px`, 
-          height: `${96 * sizeMultiplier}px`,
-          opacity: opacityMultiplier 
+          width: `${120 * sizeMultiplier}px`, 
+          height: `${120 * sizeMultiplier}px`,
+          opacity: 0.8 * opacityMultiplier 
         }}
       />
       <div 
-        className="absolute bottom-1/4 right-1/4 bg-secondary/10 rounded-full blur-3xl animate-float-delayed"
+        className="absolute bottom-1/4 right-1/4 bg-secondary/20 rounded-full blur-3xl animate-float-delayed"
+        style={{ 
+          width: `${100 * sizeMultiplier}px`, 
+          height: `${100 * sizeMultiplier}px`,
+          opacity: 0.8 * opacityMultiplier 
+        }}
+      />
+      <div 
+        className="absolute top-1/2 right-1/3 bg-accent/15 rounded-full blur-2xl animate-float-fast"
         style={{ 
           width: `${80 * sizeMultiplier}px`, 
           height: `${80 * sizeMultiplier}px`,
-          opacity: opacityMultiplier 
-        }}
-      />
-      <div 
-        className="absolute top-1/2 right-1/3 bg-accent/8 rounded-full blur-2xl animate-float-fast"
-        style={{ 
-          width: `${64 * sizeMultiplier}px`, 
-          height: `${64 * sizeMultiplier}px`,
-          opacity: opacityMultiplier * 0.8
+          opacity: 0.7 * opacityMultiplier
         }}
       />
       

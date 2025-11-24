@@ -70,8 +70,8 @@ interface AdminPanelProps {
   onReset: () => void;
   customTeams: Team[];
   onCustomTeamsChange: (teams: Team[]) => void;
-  showLogoBg: boolean;
-  onShowLogoBgChange: (show: boolean) => void;
+  logoBgColor: 'black' | 'white' | 'transparent';
+  onLogoBgColorChange: (color: 'black' | 'white' | 'transparent') => void;
   bgColor: string;
   onBgColorChange: (color: string) => void;
   obsMode: boolean;
@@ -100,8 +100,8 @@ export const AdminPanel = ({
   onReset,
   customTeams,
   onCustomTeamsChange,
-  showLogoBg,
-  onShowLogoBgChange,
+  logoBgColor,
+  onLogoBgColorChange,
   bgColor,
   onBgColorChange,
   obsMode,
@@ -215,16 +215,19 @@ export const AdminPanel = ({
             )}
           </div>
 
-          {/* Logo Background Toggle */}
-          <div className="flex items-center justify-between p-4 border rounded-lg">
-            <div className="space-y-0.5">
-              <Label>Fond noir des logos</Label>
-              <p className="text-sm text-muted-foreground">Afficher un fond noir derrière les logos des équipes</p>
-            </div>
-            <Switch
-              checked={showLogoBg}
-              onCheckedChange={onShowLogoBgChange}
-            />
+          {/* Logo Background Select */}
+          <div className="space-y-2">
+            <Label>Fond des logos</Label>
+            <Select value={logoBgColor} onValueChange={(value) => onLogoBgColorChange(value as 'black' | 'white' | 'transparent')}>
+              <SelectTrigger>
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="black">Noir</SelectItem>
+                <SelectItem value="white">Blanc</SelectItem>
+                <SelectItem value="transparent">Transparent</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
 
           {/* Color Presets */}
