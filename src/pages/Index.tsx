@@ -8,6 +8,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { X } from "lucide-react";
 import lambersLogo from "@/assets/lamberscard-logo.png";
+import whatnotLogo from "@/assets/whatnot-logo.png";
 
 interface CustomPanel {
   label: string;
@@ -222,17 +223,27 @@ const Index = () => {
                 customPanels={customPanels}
               />
               
-              {/* Lamberscard Branding */}
+              {/* Lamberscard & Whatnot Branding */}
               {!obsMode && (
-                <a 
-                  href="https://lamberscard.com" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="absolute left-4 bottom-3 flex items-center gap-2 opacity-70 hover:opacity-100 transition-opacity"
-                >
-                  <span className="text-sm font-semibold text-foreground">Créé par Lamberscard.com</span>
-                  <img src={lambersLogo} alt="Lamberscard" className="h-8" />
-                </a>
+                <div className="absolute left-4 bottom-3 flex items-center gap-6">
+                  <a 
+                    href="https://lamberscard.com" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 opacity-70 hover:opacity-100 transition-opacity"
+                  >
+                    <span className="text-sm font-semibold text-foreground">Créé par Lamberscard.com</span>
+                    <img src={lambersLogo} alt="Lamberscard" className="h-8" />
+                  </a>
+                  <a 
+                    href="https://whatnot.com/invite/lamberscard_com" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="opacity-70 hover:opacity-100 transition-opacity"
+                  >
+                    <img src={whatnotLogo} alt="Whatnot" className="h-8" />
+                  </a>
+                </div>
               )}
             </div>
           </div>
