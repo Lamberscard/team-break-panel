@@ -6,8 +6,47 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Switch } from "@/components/ui/switch";
 import { Slider } from "@/components/ui/slider";
-import { Settings, Plus, Trash2, Edit } from "lucide-react";
+import { Settings, Plus, Trash2, Edit, Palette } from "lucide-react";
 import { Sport, Team } from "@/data/teams";
+
+const colorPresets = {
+  default: {
+    name: "Défaut",
+    bgColor: "#212329",
+    gridBgColor: "#1a1d23",
+    icon: "⚫"
+  },
+  cyberpunk: {
+    name: "Cyberpunk",
+    bgColor: "#0a0e27",
+    gridBgColor: "transparent",
+    icon: "🌆"
+  },
+  ocean: {
+    name: "Océan",
+    bgColor: "#001f3f",
+    gridBgColor: "rgba(0, 31, 63, 0.7)",
+    icon: "🌊"
+  },
+  fire: {
+    name: "Feu",
+    bgColor: "#1a0a00",
+    gridBgColor: "rgba(51, 17, 0, 0.7)",
+    icon: "🔥"
+  },
+  forest: {
+    name: "Forêt",
+    bgColor: "#0d1f0d",
+    gridBgColor: "rgba(13, 31, 13, 0.8)",
+    icon: "🌲"
+  },
+  neon: {
+    name: "Néon",
+    bgColor: "#1a001a",
+    gridBgColor: "transparent",
+    icon: "💜"
+  }
+};
 
 interface CustomPanel {
   label: string;
@@ -101,6 +140,12 @@ export const AdminPanel = ({
     onCustomTeamsChange(customTeams.filter(t => t.id !== teamId));
   };
 
+  const applyColorPreset = (presetKey: keyof typeof colorPresets) => {
+    const preset = colorPresets[presetKey];
+    onBgColorChange(preset.bgColor);
+    onGridBgColorChange(preset.gridBgColor);
+  };
+
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -163,6 +208,27 @@ export const AdminPanel = ({
               checked={showLogoBg}
               onCheckedChange={onShowLogoBgChange}
             />
+          </div>
+
+          {/* Color Presets */}
+          <div className="space-y-3">
+            <div className="flex items-center gap-2">
+              <Palette className="w-4 h-4" />
+              <Label>Presets de Couleurs</Label>
+            </div>
+            <div className="grid grid-cols-3 gap-2">
+              {Object.entries(colorPresets).map(([key, preset]) => (
+                <Button
+                  key={key}
+                  variant="outline"
+                  className="h-auto py-3 flex flex-col gap-1"
+                  onClick={() => applyColorPreset(key as keyof typeof colorPresets)}
+                >
+                  <span className="text-2xl">{preset.icon}</span>
+                  <span className="text-xs">{preset.name}</span>
+                </Button>
+              ))}
+            </div>
           </div>
 
           {/* Animation Toggle */}
