@@ -205,8 +205,8 @@ const Index = () => {
       <div className={obsMode ? "w-full h-screen relative z-10" : "w-full h-screen flex items-center justify-center p-2 relative z-10"}>
         <div 
           className={obsMode 
-            ? "w-full h-full bg-card/95 backdrop-blur-sm" 
-            : "w-full max-w-[98vw] aspect-video bg-card/95 backdrop-blur-sm rounded-lg shadow-2xl overflow-hidden border-2"
+            ? `w-full h-full ${gridBgColor === 'transparent' || gridBgColor.startsWith('rgba') ? 'bg-transparent' : 'bg-card/95'} ${gridBgColor === 'transparent' ? '' : 'backdrop-blur-sm'}` 
+            : `w-full max-w-[98vw] aspect-video ${gridBgColor === 'transparent' || gridBgColor.startsWith('rgba') ? 'bg-transparent' : 'bg-card/95'} ${gridBgColor === 'transparent' ? '' : 'backdrop-blur-sm'} rounded-lg shadow-2xl overflow-hidden border-2`
           }
           style={!obsMode ? { borderColor: borderColor } : {}}
         >
