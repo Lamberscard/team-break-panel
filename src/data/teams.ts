@@ -97,7 +97,40 @@ export const SOCCER_TEAMS: Team[] = [
   { id: 'sheffield', name: 'Sheffield United', logo: 'https://resources.premierleague.com/premierleague/badges/t49.png', color: '#EE2737' },
 ];
 
-export type Sport = 'NBA' | 'NFL' | 'SOCCER';
+export const MLB_TEAMS: Team[] = [
+  { id: 'orioles', name: 'Baltimore Orioles', logo: 'https://a.espncdn.com/i/teamlogos/mlb/500/bal.png', color: '#DF4601' },
+  { id: 'red-sox', name: 'Boston Red Sox', logo: 'https://a.espncdn.com/i/teamlogos/mlb/500/bos.png', color: '#BD3039' },
+  { id: 'yankees', name: 'New York Yankees', logo: 'https://a.espncdn.com/i/teamlogos/mlb/500/nyy.png', color: '#003087' },
+  { id: 'rays', name: 'Tampa Bay Rays', logo: 'https://a.espncdn.com/i/teamlogos/mlb/500/tb.png', color: '#092C5C' },
+  { id: 'blue-jays', name: 'Toronto Blue Jays', logo: 'https://a.espncdn.com/i/teamlogos/mlb/500/tor.png', color: '#134A8E' },
+  { id: 'white-sox', name: 'Chicago White Sox', logo: 'https://a.espncdn.com/i/teamlogos/mlb/500/chw.png', color: '#27251F' },
+  { id: 'guardians', name: 'Cleveland Guardians', logo: 'https://a.espncdn.com/i/teamlogos/mlb/500/cle.png', color: '#00385D' },
+  { id: 'tigers', name: 'Detroit Tigers', logo: 'https://a.espncdn.com/i/teamlogos/mlb/500/det.png', color: '#0C2340' },
+  { id: 'royals', name: 'Kansas City Royals', logo: 'https://a.espncdn.com/i/teamlogos/mlb/500/kc.png', color: '#004687' },
+  { id: 'twins', name: 'Minnesota Twins', logo: 'https://a.espncdn.com/i/teamlogos/mlb/500/min.png', color: '#002B5C' },
+  { id: 'astros', name: 'Houston Astros', logo: 'https://a.espncdn.com/i/teamlogos/mlb/500/hou.png', color: '#EB6E1F' },
+  { id: 'angels', name: 'Los Angeles Angels', logo: 'https://a.espncdn.com/i/teamlogos/mlb/500/laa.png', color: '#BA0021' },
+  { id: 'athletics', name: 'Oakland Athletics', logo: 'https://a.espncdn.com/i/teamlogos/mlb/500/oak.png', color: '#003831' },
+  { id: 'mariners', name: 'Seattle Mariners', logo: 'https://a.espncdn.com/i/teamlogos/mlb/500/sea.png', color: '#0C2C56' },
+  { id: 'rangers', name: 'Texas Rangers', logo: 'https://a.espncdn.com/i/teamlogos/mlb/500/tex.png', color: '#003278' },
+  { id: 'braves', name: 'Atlanta Braves', logo: 'https://a.espncdn.com/i/teamlogos/mlb/500/atl.png', color: '#CE1141' },
+  { id: 'marlins', name: 'Miami Marlins', logo: 'https://a.espncdn.com/i/teamlogos/mlb/500/mia.png', color: '#00A3E0' },
+  { id: 'mets', name: 'New York Mets', logo: 'https://a.espncdn.com/i/teamlogos/mlb/500/nym.png', color: '#002D72' },
+  { id: 'phillies', name: 'Philadelphia Phillies', logo: 'https://a.espncdn.com/i/teamlogos/mlb/500/phi.png', color: '#E81828' },
+  { id: 'nationals', name: 'Washington Nationals', logo: 'https://a.espncdn.com/i/teamlogos/mlb/500/wsh.png', color: '#AB0003' },
+  { id: 'cubs', name: 'Chicago Cubs', logo: 'https://a.espncdn.com/i/teamlogos/mlb/500/chc.png', color: '#0E3386' },
+  { id: 'reds', name: 'Cincinnati Reds', logo: 'https://a.espncdn.com/i/teamlogos/mlb/500/cin.png', color: '#C6011F' },
+  { id: 'brewers', name: 'Milwaukee Brewers', logo: 'https://a.espncdn.com/i/teamlogos/mlb/500/mil.png', color: '#12284B' },
+  { id: 'pirates', name: 'Pittsburgh Pirates', logo: 'https://a.espncdn.com/i/teamlogos/mlb/500/pit.png', color: '#27251F' },
+  { id: 'cardinals-mlb', name: 'St. Louis Cardinals', logo: 'https://a.espncdn.com/i/teamlogos/mlb/500/stl.png', color: '#C41E3A' },
+  { id: 'diamondbacks', name: 'Arizona Diamondbacks', logo: 'https://a.espncdn.com/i/teamlogos/mlb/500/ari.png', color: '#A71930' },
+  { id: 'rockies', name: 'Colorado Rockies', logo: 'https://a.espncdn.com/i/teamlogos/mlb/500/col.png', color: '#33006F' },
+  { id: 'dodgers', name: 'Los Angeles Dodgers', logo: 'https://a.espncdn.com/i/teamlogos/mlb/500/lad.png', color: '#005A9C' },
+  { id: 'padres', name: 'San Diego Padres', logo: 'https://a.espncdn.com/i/teamlogos/mlb/500/sd.png', color: '#2F241D' },
+  { id: 'giants', name: 'San Francisco Giants', logo: 'https://a.espncdn.com/i/teamlogos/mlb/500/sf.png', color: '#FD5A1E' },
+];
+
+export type Sport = 'NBA' | 'NFL' | 'SOCCER' | 'MLB';
 
 export const getTeamsBySport = (sport: Sport): Team[] => {
   switch (sport) {
@@ -107,6 +140,8 @@ export const getTeamsBySport = (sport: Sport): Team[] => {
       return NFL_TEAMS;
     case 'SOCCER':
       return SOCCER_TEAMS;
+    case 'MLB':
+      return MLB_TEAMS;
     default:
       return NBA_TEAMS;
   }
