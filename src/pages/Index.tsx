@@ -71,6 +71,11 @@ const Index = () => {
     return saved ? JSON.parse(saved) : true;
   });
 
+  const [animationIntensity, setAnimationIntensity] = useState<number>(() => {
+    const saved = localStorage.getItem('animationIntensity');
+    return saved ? parseInt(saved) : 2;
+  });
+
   const defaultTeams = getTeamsBySport(sport);
   const sportCustomTeams = customTeams.filter(t => t.sport === sport);
   const teams = [...defaultTeams, ...sportCustomTeams];
@@ -128,6 +133,10 @@ const Index = () => {
   }, [showAnimation]);
 
   useEffect(() => {
+    localStorage.setItem('animationIntensity', animationIntensity.toString());
+  }, [animationIntensity]);
+
+  useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
       if (e.key === 'Escape' && obsMode) {
         setObsMode(false);
@@ -173,7 +182,7 @@ const Index = () => {
       backgroundColor: bgColor,
       padding: obsMode ? '0' : '0.5rem'
     }}>
-      {showAnimation && <AnimatedBackground />}
+      {showAnimation && <AnimatedBackground intensity={animationIntensity} />}
       
       {/* Main Content - 16:9 aspect ratio */}
       <div className={obsMode ? "w-full h-screen relative z-10" : "w-full h-screen flex items-center justify-center p-2 relative z-10"}>
@@ -248,6 +257,8 @@ const Index = () => {
           onGridBgColorChange={setGridBgColor}
           showAnimation={showAnimation}
           onShowAnimationChange={setShowAnimation}
+          animationIntensity={animationIntensity}
+          onAnimationIntensityChange={setAnimationIntensity}
         />
       )}
 

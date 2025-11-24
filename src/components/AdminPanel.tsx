@@ -5,6 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Switch } from "@/components/ui/switch";
+import { Slider } from "@/components/ui/slider";
 import { Settings, Plus, Trash2, Edit } from "lucide-react";
 import { Sport, Team } from "@/data/teams";
 
@@ -36,6 +37,8 @@ interface AdminPanelProps {
   onGridBgColorChange: (color: string) => void;
   showAnimation: boolean;
   onShowAnimationChange: (show: boolean) => void;
+  animationIntensity: number;
+  onAnimationIntensityChange: (intensity: number) => void;
 }
 
 export const AdminPanel = ({
@@ -60,6 +63,8 @@ export const AdminPanel = ({
   onGridBgColorChange,
   showAnimation,
   onShowAnimationChange,
+  animationIntensity,
+  onAnimationIntensityChange,
 }: AdminPanelProps) => {
   const [logoInput, setLogoInput] = useState(userLogo || "");
   const [bannerInput, setBannerInput] = useState(bannerLogo || "");
@@ -172,6 +177,32 @@ export const AdminPanel = ({
             />
           </div>
 
+          {/* Animation Intensity Slider */}
+          {showAnimation && (
+            <div className="space-y-3 p-4 border rounded-lg">
+              <div className="space-y-0.5">
+                <Label>Intensité de l'animation</Label>
+                <p className="text-sm text-muted-foreground">
+                  {animationIntensity === 1 && "Subtile - Mouvement léger"}
+                  {animationIntensity === 2 && "Modérée - Équilibrée"}
+                  {animationIntensity === 3 && "Intense - Mouvement prononcé"}
+                </p>
+              </div>
+              <div className="flex items-center gap-4">
+                <span className="text-xs text-muted-foreground">Subtile</span>
+                <Slider
+                  value={[animationIntensity]}
+                  onValueChange={(value) => onAnimationIntensityChange(value[0])}
+                  min={1}
+                  max={3}
+                  step={1}
+                  className="flex-1"
+                />
+                <span className="text-xs text-muted-foreground">Intense</span>
+              </div>
+            </div>
+          )}
+
           {/* Banner Logo */}
           <div className="space-y-2">
             <Label>Logo bannière (970x90px recommandé)</Label>
@@ -215,18 +246,20 @@ export const AdminPanel = ({
           {/* Grid Background Color */}
           <div className="space-y-2">
             <Label>Couleur de fond du tableau</Label>
+            <p className="text-sm text-muted-foreground mb-2">Utilisez "transparent" pour voir l'animation</p>
             <div className="flex gap-2 items-center">
               <Input
                 type="color"
-                value={gridBgColor}
+                value={gridBgColor === 'transparent' ? '#1a1d23' : gridBgColor}
                 onChange={(e) => onGridBgColorChange(e.target.value)}
                 className="w-20 h-10"
+                disabled={gridBgColor === 'transparent'}
               />
               <Input
                 type="text"
                 value={gridBgColor}
                 onChange={(e) => onGridBgColorChange(e.target.value)}
-                placeholder="#1a1d23"
+                placeholder="#1a1d23 ou transparent"
                 className="flex-1"
               />
             </div>
