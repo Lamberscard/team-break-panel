@@ -80,6 +80,11 @@ const Index = () => {
     return localStorage.getItem('borderColor') || '#00bfff';
   });
 
+  const [showSmoothElements, setShowSmoothElements] = useState<boolean>(() => {
+    const saved = localStorage.getItem('showSmoothElements');
+    return saved ? JSON.parse(saved) : false;
+  });
+
   const defaultTeams = getTeamsBySport(sport);
   const sportCustomTeams = customTeams.filter(t => t.sport === sport);
   const teams = [...defaultTeams, ...sportCustomTeams];
@@ -145,6 +150,10 @@ const Index = () => {
   }, [borderColor]);
 
   useEffect(() => {
+    localStorage.setItem('showSmoothElements', JSON.stringify(showSmoothElements));
+  }, [showSmoothElements]);
+
+  useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
       if (e.key === 'Escape' && obsMode) {
         setObsMode(false);
@@ -190,7 +199,7 @@ const Index = () => {
       backgroundColor: bgColor,
       padding: obsMode ? '0' : '0.5rem'
     }}>
-      {showAnimation && <AnimatedBackground intensity={animationIntensity} />}
+      {showAnimation && <AnimatedBackground intensity={animationIntensity} showSmoothElements={showSmoothElements} />}
       
       {/* Main Content - 16:9 aspect ratio */}
       <div className={obsMode ? "w-full h-screen relative z-10" : "w-full h-screen flex items-center justify-center p-2 relative z-10"}>
@@ -272,6 +281,8 @@ const Index = () => {
           onShowAnimationChange={setShowAnimation}
           animationIntensity={animationIntensity}
           onAnimationIntensityChange={setAnimationIntensity}
+          showSmoothElements={showSmoothElements}
+          onShowSmoothElementsChange={setShowSmoothElements}
         />
       )}
 
