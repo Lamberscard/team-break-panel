@@ -293,8 +293,8 @@ export const AdminPanel = ({
           {showAnimation && (
             <div className="flex items-center justify-between p-4 border rounded-lg">
               <div className="space-y-0.5">
-                <Label>Éléments animés supplémentaires</Label>
-                <p className="text-sm text-muted-foreground">Ajouter des particules et formes flottantes</p>
+                <Label>Particules et étoiles</Label>
+                <p className="text-sm text-muted-foreground">Ajouter des particules flottantes et un effet étoilé</p>
               </div>
               <Switch
                 checked={showSmoothElements}
