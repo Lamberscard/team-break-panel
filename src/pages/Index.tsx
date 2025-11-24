@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { TeamGrid } from "@/components/TeamGrid";
 import { StatsPanel } from "@/components/StatsPanel";
 import { AdminPanel } from "@/components/AdminPanel";
+import { AnimatedBackground } from "@/components/AnimatedBackground";
 import { getTeamsBySport, Sport, Team } from "@/data/teams";
 import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
@@ -159,17 +160,19 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen" style={{ 
+    <div className="min-h-screen relative" style={{ 
       backgroundColor: bgColor,
       padding: obsMode ? '0' : '0.5rem'
     }}>
+      <AnimatedBackground />
+      
       {/* Main Content - 16:9 aspect ratio */}
-      <div className={obsMode ? "w-full h-screen" : "w-full h-screen flex items-center justify-center p-2"}>
+      <div className={obsMode ? "w-full h-screen relative z-10" : "w-full h-screen flex items-center justify-center p-2 relative z-10"}>
         <div className={obsMode 
-          ? "w-full h-full bg-card" 
-          : "w-full max-w-[98vw] aspect-video bg-card rounded-lg shadow-2xl overflow-hidden border-2 border-primary"
+          ? "w-full h-full bg-card/95 backdrop-blur-sm" 
+          : "w-full max-w-[98vw] aspect-video bg-card/95 backdrop-blur-sm rounded-lg shadow-2xl overflow-hidden border-2 border-primary"
         }>
-          <div className="h-full flex flex-col">
+          <div className="h-full flex flex-col relative">
             {/* Banner Logo */}
             {bannerLogo && (
               <div className="w-full flex items-center justify-center py-2 px-4" style={{ backgroundColor: gridBgColor }}>
