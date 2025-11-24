@@ -86,6 +86,14 @@ const Index = () => {
     return saved ? JSON.parse(saved) : false;
   });
 
+  const [gradientColor1, setGradientColor1] = useState<string>(() => {
+    return localStorage.getItem('gradientColor1') || '#00bfff';
+  });
+
+  const [gradientColor2, setGradientColor2] = useState<string>(() => {
+    return localStorage.getItem('gradientColor2') || '#ff00ff';
+  });
+
   const defaultTeams = getTeamsBySport(sport);
   const sportCustomTeams = customTeams.filter(t => t.sport === sport);
   const teams = [...defaultTeams, ...sportCustomTeams];
@@ -155,6 +163,14 @@ const Index = () => {
   }, [showSmoothElements]);
 
   useEffect(() => {
+    localStorage.setItem('gradientColor1', gradientColor1);
+  }, [gradientColor1]);
+
+  useEffect(() => {
+    localStorage.setItem('gradientColor2', gradientColor2);
+  }, [gradientColor2]);
+
+  useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
       if (e.key === 'Escape' && obsMode) {
         setObsMode(false);
@@ -200,7 +216,7 @@ const Index = () => {
       backgroundColor: bgColor,
       padding: obsMode ? '0' : '0.5rem'
     }}>
-      {showAnimation && <AnimatedBackground intensity={animationIntensity} showSmoothElements={showSmoothElements} />}
+      {showAnimation && <AnimatedBackground intensity={animationIntensity} showSmoothElements={showSmoothElements} gradientColor1={gradientColor1} gradientColor2={gradientColor2} />}
       
       {/* Main Content - 16:9 aspect ratio */}
       <div className={obsMode ? "w-full h-screen relative z-10" : "w-full h-screen flex items-center justify-center p-2 relative z-10"}>
@@ -284,6 +300,10 @@ const Index = () => {
           onAnimationIntensityChange={setAnimationIntensity}
           showSmoothElements={showSmoothElements}
           onShowSmoothElementsChange={setShowSmoothElements}
+          gradientColor1={gradientColor1}
+          onGradientColor1Change={setGradientColor1}
+          gradientColor2={gradientColor2}
+          onGradientColor2Change={setGradientColor2}
         />
       )}
 
