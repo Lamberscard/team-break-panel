@@ -86,6 +86,8 @@ interface AdminPanelProps {
   onShowAnimationChange: (show: boolean) => void;
   animationIntensity: number;
   onAnimationIntensityChange: (intensity: number) => void;
+  showSmoothElements: boolean;
+  onShowSmoothElementsChange: (show: boolean) => void;
 }
 
 export const AdminPanel = ({
@@ -114,6 +116,8 @@ export const AdminPanel = ({
   onShowAnimationChange,
   animationIntensity,
   onAnimationIntensityChange,
+  showSmoothElements,
+  onShowSmoothElementsChange,
 }: AdminPanelProps) => {
   const [logoInput, setLogoInput] = useState(userLogo || "");
   const [bannerInput, setBannerInput] = useState(bannerLogo || "");
@@ -279,6 +283,20 @@ export const AdminPanel = ({
                 />
                 <span className="text-xs text-muted-foreground">Intense</span>
               </div>
+            </div>
+          )}
+
+          {/* Smooth Elements Toggle */}
+          {showAnimation && (
+            <div className="flex items-center justify-between p-4 border rounded-lg">
+              <div className="space-y-0.5">
+                <Label>Éléments animés supplémentaires</Label>
+                <p className="text-sm text-muted-foreground">Ajouter des particules et formes flottantes</p>
+              </div>
+              <Switch
+                checked={showSmoothElements}
+                onCheckedChange={onShowSmoothElementsChange}
+              />
             </div>
           )}
 
