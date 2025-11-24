@@ -34,6 +34,8 @@ interface AdminPanelProps {
   onBannerLogoChange: (logo: string) => void;
   gridBgColor: string;
   onGridBgColorChange: (color: string) => void;
+  showAnimation: boolean;
+  onShowAnimationChange: (show: boolean) => void;
 }
 
 export const AdminPanel = ({
@@ -56,6 +58,8 @@ export const AdminPanel = ({
   onBannerLogoChange,
   gridBgColor,
   onGridBgColorChange,
+  showAnimation,
+  onShowAnimationChange,
 }: AdminPanelProps) => {
   const [logoInput, setLogoInput] = useState(userLogo || "");
   const [bannerInput, setBannerInput] = useState(bannerLogo || "");
@@ -153,6 +157,18 @@ export const AdminPanel = ({
             <Switch
               checked={showLogoBg}
               onCheckedChange={onShowLogoBgChange}
+            />
+          </div>
+
+          {/* Animation Toggle */}
+          <div className="flex items-center justify-between p-4 border rounded-lg">
+            <div className="space-y-0.5">
+              <Label>Animation du fond</Label>
+              <p className="text-sm text-muted-foreground">Activer les effets animés en arrière-plan</p>
+            </div>
+            <Switch
+              checked={showAnimation}
+              onCheckedChange={onShowAnimationChange}
             />
           </div>
 

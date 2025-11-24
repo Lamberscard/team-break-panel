@@ -66,6 +66,11 @@ const Index = () => {
     return localStorage.getItem('gridBgColor') || '#1a1d23';
   });
 
+  const [showAnimation, setShowAnimation] = useState<boolean>(() => {
+    const saved = localStorage.getItem('showAnimation');
+    return saved ? JSON.parse(saved) : true;
+  });
+
   const defaultTeams = getTeamsBySport(sport);
   const sportCustomTeams = customTeams.filter(t => t.sport === sport);
   const teams = [...defaultTeams, ...sportCustomTeams];
@@ -119,6 +124,10 @@ const Index = () => {
   }, [gridBgColor]);
 
   useEffect(() => {
+    localStorage.setItem('showAnimation', JSON.stringify(showAnimation));
+  }, [showAnimation]);
+
+  useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
       if (e.key === 'Escape' && obsMode) {
         setObsMode(false);
@@ -164,7 +173,7 @@ const Index = () => {
       backgroundColor: bgColor,
       padding: obsMode ? '0' : '0.5rem'
     }}>
-      <AnimatedBackground />
+      {showAnimation && <AnimatedBackground />}
       
       {/* Main Content - 16:9 aspect ratio */}
       <div className={obsMode ? "w-full h-screen relative z-10" : "w-full h-screen flex items-center justify-center p-2 relative z-10"}>
@@ -237,6 +246,8 @@ const Index = () => {
           onBannerLogoChange={setBannerLogo}
           gridBgColor={gridBgColor}
           onGridBgColorChange={setGridBgColor}
+          showAnimation={showAnimation}
+          onShowAnimationChange={setShowAnimation}
         />
       )}
 
