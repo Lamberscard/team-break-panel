@@ -186,6 +186,7 @@ export const AdminPanel = ({
                 <SelectItem value="NBA">NBA</SelectItem>
                 <SelectItem value="NFL">NFL</SelectItem>
                 <SelectItem value="SOCCER">Soccer</SelectItem>
+                <SelectItem value="MLB">MLB</SelectItem>
               </SelectContent>
             </Select>
           </div>
