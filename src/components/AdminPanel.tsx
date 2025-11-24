@@ -65,8 +65,6 @@ interface AdminPanelProps {
   onSportChange: (sport: Sport) => void;
   customPanels: CustomPanel[];
   onCustomPanelsChange: (panels: CustomPanel[]) => void;
-  userLogo: string | null;
-  onUserLogoChange: (logo: string) => void;
   onReset: () => void;
   customTeams: Team[];
   onCustomTeamsChange: (teams: Team[]) => void;
@@ -76,8 +74,6 @@ interface AdminPanelProps {
   onBgColorChange: (color: string) => void;
   obsMode: boolean;
   onObsModeChange: (mode: boolean) => void;
-  bannerLogo: string | null;
-  onBannerLogoChange: (logo: string) => void;
   gridBgColor: string;
   onGridBgColorChange: (color: string) => void;
   borderColor: string;
@@ -99,8 +95,6 @@ export const AdminPanel = ({
   onSportChange,
   customPanels,
   onCustomPanelsChange,
-  userLogo,
-  onUserLogoChange,
   onReset,
   customTeams,
   onCustomTeamsChange,
@@ -110,8 +104,6 @@ export const AdminPanel = ({
   onBgColorChange,
   obsMode,
   onObsModeChange,
-  bannerLogo,
-  onBannerLogoChange,
   gridBgColor,
   onGridBgColorChange,
   borderColor,
@@ -127,8 +119,6 @@ export const AdminPanel = ({
   gradientColor2,
   onGradientColor2Change,
 }: AdminPanelProps) => {
-  const [logoInput, setLogoInput] = useState(userLogo || "");
-  const [bannerInput, setBannerInput] = useState(bannerLogo || "");
   const [editingTeam, setEditingTeam] = useState<Team | null>(null);
   const [newTeam, setNewTeam] = useState({ name: "", logo: "", color: "#000000" });
 
@@ -187,6 +177,18 @@ export const AdminPanel = ({
         </DialogHeader>
         
         <div className="space-y-6 py-4">
+          {/* OBS Mode */}
+          <div className="flex items-center justify-between p-4 border rounded-lg bg-primary/10">
+            <div className="space-y-0.5">
+              <Label className="text-primary">Mode OBS / Plein écran</Label>
+              <p className="text-sm text-muted-foreground">Masque les bordures et contrôles pour la capture d'écran</p>
+            </div>
+            <Switch
+              checked={obsMode}
+              onCheckedChange={onObsModeChange}
+            />
+          </div>
+
           {/* Sport Selection */}
           <div className="space-y-2">
             <Label>Sport</Label>
@@ -201,26 +203,6 @@ export const AdminPanel = ({
                 <SelectItem value="MLB">MLB</SelectItem>
               </SelectContent>
             </Select>
-          </div>
-
-          {/* User Logo */}
-          <div className="space-y-2">
-            <Label>Your Logo URL</Label>
-            <div className="flex gap-2">
-              <Input
-                value={logoInput}
-                onChange={(e) => setLogoInput(e.target.value)}
-                placeholder="https://example.com/logo.png"
-              />
-              <Button onClick={() => onUserLogoChange(logoInput)}>
-                Save
-              </Button>
-            </div>
-            {userLogo && (
-              <div className="mt-2 p-2 bg-muted rounded-lg">
-                <img src={userLogo} alt="User logo" className="h-16 object-contain" />
-              </div>
-            )}
           </div>
 
           {/* Logo Background Select */}
@@ -354,26 +336,6 @@ export const AdminPanel = ({
             </div>
           )}
 
-          {/* Banner Logo */}
-          <div className="space-y-2">
-            <Label>Logo bannière (970x90px recommandé)</Label>
-            <div className="flex gap-2">
-              <Input
-                value={bannerInput}
-                onChange={(e) => setBannerInput(e.target.value)}
-                placeholder="https://example.com/banner.png"
-              />
-              <Button onClick={() => onBannerLogoChange(bannerInput)}>
-                Save
-              </Button>
-            </div>
-            {bannerLogo && (
-              <div className="mt-2 p-2 bg-muted rounded-lg">
-                <img src={bannerLogo} alt="Banner logo" className="h-[90px] w-auto max-w-full object-contain" />
-              </div>
-            )}
-          </div>
-
           {/* Background Color */}
           <div className="space-y-2">
             <Label>Couleur de fond extérieur</Label>
@@ -434,18 +396,6 @@ export const AdminPanel = ({
                 className="flex-1"
               />
             </div>
-          </div>
-
-          {/* OBS Mode */}
-          <div className="flex items-center justify-between p-4 border rounded-lg bg-primary/10">
-            <div className="space-y-0.5">
-              <Label className="text-primary">Mode OBS / Plein écran</Label>
-              <p className="text-sm text-muted-foreground">Masque les bordures et contrôles pour la capture d'écran</p>
-            </div>
-            <Switch
-              checked={obsMode}
-              onCheckedChange={onObsModeChange}
-            />
           </div>
 
           {/* Custom Panels */}

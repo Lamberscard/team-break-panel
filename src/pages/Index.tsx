@@ -28,10 +28,6 @@ const Index = () => {
     return saved ? JSON.parse(saved) : [];
   });
 
-  const [userLogo, setUserLogo] = useState<string | null>(() => {
-    return localStorage.getItem('userLogo');
-  });
-
   const [customPanels, setCustomPanels] = useState<CustomPanel[]>(() => {
     const saved = localStorage.getItem('customPanels');
     return saved ? JSON.parse(saved) : [
@@ -57,10 +53,6 @@ const Index = () => {
   const [obsMode, setObsMode] = useState<boolean>(() => {
     const saved = localStorage.getItem('obsMode');
     return saved ? JSON.parse(saved) : false;
-  });
-
-  const [bannerLogo, setBannerLogo] = useState<string | null>(() => {
-    return localStorage.getItem('bannerLogo');
   });
 
   const [gridBgColor, setGridBgColor] = useState<string>(() => {
@@ -107,14 +99,6 @@ const Index = () => {
   }, [selectedTeams]);
 
   useEffect(() => {
-    if (userLogo) {
-      localStorage.setItem('userLogo', userLogo);
-    } else {
-      localStorage.removeItem('userLogo');
-    }
-  }, [userLogo]);
-
-  useEffect(() => {
     localStorage.setItem('customPanels', JSON.stringify(customPanels));
   }, [customPanels]);
 
@@ -133,14 +117,6 @@ const Index = () => {
   useEffect(() => {
     localStorage.setItem('obsMode', JSON.stringify(obsMode));
   }, [obsMode]);
-
-  useEffect(() => {
-    if (bannerLogo) {
-      localStorage.setItem('bannerLogo', bannerLogo);
-    } else {
-      localStorage.removeItem('bannerLogo');
-    }
-  }, [bannerLogo]);
 
   useEffect(() => {
     localStorage.setItem('gridBgColor', gridBgColor);
@@ -228,13 +204,6 @@ const Index = () => {
           style={!obsMode ? { borderColor: borderColor } : {}}
         >
           <div className="h-full flex flex-col relative">
-            {/* Banner Logo */}
-            {bannerLogo && (
-              <div className="w-full flex items-center justify-center py-2 px-4" style={{ backgroundColor: gridBgColor }}>
-                <img src={bannerLogo} alt="Banner" className="h-[90px] w-auto max-w-[970px] object-contain" />
-              </div>
-            )}
-            
             {/* Team Grid */}
             <div className="flex-1 overflow-hidden" style={{ backgroundColor: gridBgColor }}>
               <TeamGrid
@@ -277,8 +246,6 @@ const Index = () => {
           onSportChange={handleSportChange}
           customPanels={customPanels}
           onCustomPanelsChange={setCustomPanels}
-          userLogo={userLogo}
-          onUserLogoChange={setUserLogo}
           onReset={handleReset}
           customTeams={customTeams}
           onCustomTeamsChange={setCustomTeams}
@@ -288,8 +255,6 @@ const Index = () => {
           onBgColorChange={setBgColor}
           obsMode={obsMode}
           onObsModeChange={setObsMode}
-          bannerLogo={bannerLogo}
-          onBannerLogoChange={setBannerLogo}
           gridBgColor={gridBgColor}
           onGridBgColorChange={setGridBgColor}
           borderColor={borderColor}
