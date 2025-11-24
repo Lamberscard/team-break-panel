@@ -1,3 +1,5 @@
+import { useMemo } from "react";
+
 interface AnimatedBackgroundProps {
   intensity: number;
   showSmoothElements?: boolean;
@@ -8,38 +10,21 @@ export const AnimatedBackground = ({ intensity = 2, showSmoothElements = false }
   const opacityMultiplier = intensity === 1 ? 0.6 : intensity === 2 ? 1 : 1.4;
   const sizeMultiplier = intensity === 1 ? 0.8 : intensity === 2 ? 1 : 1.3;
   
-  // Generate stars positions (more stars for higher intensity)
-  const starsCount = intensity * 50;
-  const stars = Array.from({ length: starsCount }).map((_, i) => ({
-    id: i,
-    x: Math.random() * 100,
-    y: Math.random() * 100,
-    size: Math.random() * 2 + 1,
-    opacity: Math.random() * 0.8 + 0.2,
-    duration: Math.random() * 3 + 2,
-  }));
+  // Generate stars positions once (memoized to prevent regeneration)
+  const stars = useMemo(() => {
+    const starsCount = intensity * 50;
+    return Array.from({ length: starsCount }).map((_, i) => ({
+      id: i,
+      x: Math.random() * 100,
+      y: Math.random() * 100,
+      size: Math.random() * 2 + 1,
+      opacity: Math.random() * 0.8 + 0.2,
+      duration: Math.random() * 3 + 2,
+    }));
+  }, [intensity]);
   
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {/* Space stars effect */}
-      <div className="absolute inset-0">
-        {stars.map(star => (
-          <div
-            key={star.id}
-            className="absolute rounded-full bg-white animate-pulse"
-            style={{
-              left: `${star.x}%`,
-              top: `${star.y}%`,
-              width: `${star.size}px`,
-              height: `${star.size}px`,
-              opacity: star.opacity * opacityMultiplier,
-              animation: `pulse ${star.duration}s ease-in-out infinite`,
-              boxShadow: `0 0 ${star.size * 2}px rgba(255, 255, 255, ${star.opacity})`
-            }}
-          />
-        ))}
-      </div>
-      
       {/* Gradient animé principal - plus intense */}
       <div 
         className="absolute inset-0 bg-gradient-to-br from-primary/25 via-transparent to-secondary/25" 
@@ -75,6 +60,25 @@ export const AnimatedBackground = ({ intensity = 2, showSmoothElements = false }
       {/* Smooth animated elements */}
       {showSmoothElements && (
         <>
+          {/* Space stars effect */}
+          <div className="absolute inset-0">
+            {stars.map(star => (
+              <div
+                key={star.id}
+                className="absolute rounded-full bg-white animate-pulse"
+                style={{
+                  left: `${star.x}%`,
+                  top: `${star.y}%`,
+                  width: `${star.size}px`,
+                  height: `${star.size}px`,
+                  opacity: star.opacity * opacityMultiplier * 0.6,
+                  animation: `pulse ${star.duration}s ease-in-out infinite`,
+                  boxShadow: `0 0 ${star.size * 2}px rgba(255, 255, 255, ${star.opacity * 0.5})`
+                }}
+              />
+            ))}
+          </div>
+          
           {/* Floating particles */}
           <div 
             className="absolute top-[10%] left-[15%] bg-primary/20 rounded-full animate-float-slow"
