@@ -10,16 +10,16 @@ interface TeamGridProps {
 
 export const TeamGrid = ({ teams, selectedTeams, onTeamToggle, showLogoBg }: TeamGridProps) => {
   return (
-    <div className="grid grid-cols-8 gap-1.5 p-2 h-full content-center">
+    <div className="grid grid-cols-8 gap-2 p-3 h-full content-start overflow-y-auto">
       {teams.map((team) => {
         const isSelected = selectedTeams.includes(team.id);
         return (
-          <div key={team.id} className="flex flex-col items-center gap-0.5">
+          <div key={team.id} className="flex flex-col items-center gap-1">
             <button
               onClick={() => onTeamToggle(team.id)}
               className={cn(
                 "relative aspect-square rounded-md overflow-hidden transition-all duration-300 ease-in-out w-full",
-                "flex items-center justify-center p-1.5",
+                "flex items-center justify-center p-1",
                 "border-3 hover:scale-[1.03] active:scale-95",
                 isSelected 
                   ? "opacity-40 grayscale" 
@@ -38,11 +38,11 @@ export const TeamGrid = ({ teams, selectedTeams, onTeamToggle, showLogoBg }: Tea
               />
               {isSelected && (
                 <div className="absolute inset-0 flex items-center justify-center bg-black/70">
-                  <span className="text-4xl font-bold text-red-500">✗</span>
+                  <span className="text-3xl font-bold text-red-500">✗</span>
                 </div>
               )}
             </button>
-            <span className="text-[0.65rem] text-center text-foreground font-semibold leading-tight px-0.5 line-clamp-2">
+            <span className="text-[0.65rem] text-center text-foreground font-semibold leading-tight px-0.5 line-clamp-2 h-6">
               {team.name}
             </span>
           </div>
