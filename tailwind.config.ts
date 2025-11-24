@@ -105,20 +105,6 @@ export default {
             transform: "scale(1)"
           },
         },
-        "gradient-shift": {
-          "0%, 100%": { 
-            transform: "translate(0%, 0%) rotate(0deg)",
-            opacity: "1"
-          },
-          "33%": { 
-            transform: "translate(5%, 5%) rotate(120deg)",
-            opacity: "0.8"
-          },
-          "66%": { 
-            transform: "translate(-5%, 5%) rotate(240deg)",
-            opacity: "0.8"
-          },
-        },
         "float-slow": {
           "0%, 100%": { 
             transform: "translate(0, 0) scale(1)"
@@ -143,34 +129,6 @@ export default {
             transform: "translate(-25px, -35px) scale(1.15)"
           },
         },
-        "scan-horizontal": {
-          "0%": { 
-            transform: "translateY(0) scaleX(0.5)",
-            opacity: "0"
-          },
-          "50%": { 
-            transform: "translateY(50vh) scaleX(1)",
-            opacity: "1"
-          },
-          "100%": { 
-            transform: "translateY(100vh) scaleX(0.5)",
-            opacity: "0"
-          },
-        },
-        "scan-horizontal-delayed": {
-          "0%": { 
-            transform: "translateY(0) scaleX(0.5)",
-            opacity: "0"
-          },
-          "50%": { 
-            transform: "translateY(50vh) scaleX(1)",
-            opacity: "1"
-          },
-          "100%": { 
-            transform: "translateY(100vh) scaleX(0.5)",
-            opacity: "0"
-          },
-        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -178,12 +136,9 @@ export default {
         "pulse-glow": "pulse-glow 2s ease-in-out infinite",
         "glow-pulse": "glow-pulse 3s ease-in-out infinite",
         "select-flash": "select-flash 0.5s ease-in-out",
-        "gradient-shift": "gradient-shift 20s ease-in-out infinite",
         "float-slow": "float-slow 15s ease-in-out infinite",
         "float-fast": "float-fast 10s ease-in-out infinite",
         "float-delayed": "float-delayed 18s ease-in-out infinite 3s",
-        "scan-horizontal": "scan-horizontal 8s linear infinite",
-        "scan-horizontal-delayed": "scan-horizontal-delayed 8s linear infinite 4s",
       },
     },
   },
