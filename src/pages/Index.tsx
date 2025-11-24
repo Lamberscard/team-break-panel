@@ -57,6 +57,14 @@ const Index = () => {
     return saved ? JSON.parse(saved) : false;
   });
 
+  const [bannerLogo, setBannerLogo] = useState<string | null>(() => {
+    return localStorage.getItem('bannerLogo');
+  });
+
+  const [gridBgColor, setGridBgColor] = useState<string>(() => {
+    return localStorage.getItem('gridBgColor') || '#1a1d23';
+  });
+
   const defaultTeams = getTeamsBySport(sport);
   const sportCustomTeams = customTeams.filter(t => t.sport === sport);
   const teams = [...defaultTeams, ...sportCustomTeams];
@@ -96,6 +104,18 @@ const Index = () => {
   useEffect(() => {
     localStorage.setItem('obsMode', JSON.stringify(obsMode));
   }, [obsMode]);
+
+  useEffect(() => {
+    if (bannerLogo) {
+      localStorage.setItem('bannerLogo', bannerLogo);
+    } else {
+      localStorage.removeItem('bannerLogo');
+    }
+  }, [bannerLogo]);
+
+  useEffect(() => {
+    localStorage.setItem('gridBgColor', gridBgColor);
+  }, [gridBgColor]);
 
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
@@ -150,8 +170,15 @@ const Index = () => {
           : "w-full max-w-[98vw] aspect-video bg-card rounded-lg shadow-2xl overflow-hidden border-2 border-primary"
         }>
           <div className="h-full flex flex-col">
+            {/* Banner Logo */}
+            {bannerLogo && (
+              <div className="w-full flex items-center justify-center py-2 px-4" style={{ backgroundColor: gridBgColor }}>
+                <img src={bannerLogo} alt="Banner" className="h-[90px] w-auto max-w-[970px] object-contain" />
+              </div>
+            )}
+            
             {/* Team Grid */}
-            <div className="flex-1 overflow-hidden">
+            <div className="flex-1 overflow-hidden" style={{ backgroundColor: gridBgColor }}>
               <TeamGrid
                 teams={teams}
                 selectedTeams={selectedTeams}
@@ -203,6 +230,10 @@ const Index = () => {
           onBgColorChange={setBgColor}
           obsMode={obsMode}
           onObsModeChange={setObsMode}
+          bannerLogo={bannerLogo}
+          onBannerLogoChange={setBannerLogo}
+          gridBgColor={gridBgColor}
+          onGridBgColorChange={setGridBgColor}
         />
       )}
 
