@@ -42,7 +42,7 @@ export const TeamGrid = ({ teams, selectedTeams, onTeamToggle, showLogoBg }: Tea
                 </div>
               )}
             </button>
-            <span className="text-[0.5rem] text-center text-foreground/80 font-medium leading-tight px-0.5 line-clamp-2">
+            <span className="text-[0.65rem] text-center text-foreground font-semibold leading-tight px-0.5 line-clamp-2">
               {team.name}
             </span>
           </div>
