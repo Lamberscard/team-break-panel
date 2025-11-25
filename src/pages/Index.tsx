@@ -87,6 +87,16 @@ const Index = () => {
     return localStorage.getItem('gradientColor2') || '#ff00ff';
   });
 
+  const [tradeMode, setTradeMode] = useState<boolean>(() => {
+    const saved = localStorage.getItem('tradeMode');
+    return saved === 'true';
+  });
+
+  const [tradeTeams, setTradeTeams] = useState<string[]>(() => {
+    const saved = localStorage.getItem('tradeTeams');
+    return saved ? JSON.parse(saved) : [];
+  });
+
   const defaultTeams = getTeamsBySport(sport);
   const sportCustomTeams = customTeams.filter(t => t.sport === sport);
   const teams = [...defaultTeams, ...sportCustomTeams];
@@ -148,6 +158,14 @@ const Index = () => {
   }, [gradientColor2]);
 
   useEffect(() => {
+    localStorage.setItem('tradeMode', String(tradeMode));
+  }, [tradeMode]);
+
+  useEffect(() => {
+    localStorage.setItem('tradeTeams', JSON.stringify(tradeTeams));
+  }, [tradeTeams]);
+
+  useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
       if (e.key === 'Escape' && obsMode) {
         setObsMode(false);
@@ -163,12 +181,20 @@ const Index = () => {
   }, [obsMode, toast]);
 
   const handleTeamToggle = (teamId: string) => {
-    setSelectedTeams(prev => {
-      if (prev.includes(teamId)) {
-        return prev.filter(id => id !== teamId);
-      }
-      return [...prev, teamId];
-    });
+    if (tradeMode) {
+      setTradeTeams(prev => 
+        prev.includes(teamId) 
+          ? prev.filter(id => id !== teamId)
+          : [...prev, teamId]
+      );
+    } else {
+      setSelectedTeams(prev => {
+        if (prev.includes(teamId)) {
+          return prev.filter(id => id !== teamId);
+        }
+        return [...prev, teamId];
+      });
+    }
   };
 
   const handleSportChange = (newSport: Sport) => {
@@ -207,12 +233,14 @@ const Index = () => {
           <div className="h-full flex flex-col relative">
             {/* Team Grid */}
             <div className="flex-1 overflow-hidden" style={{ backgroundColor: gridBgColor }}>
-              <TeamGrid
-                teams={teams}
-                selectedTeams={selectedTeams}
-                onTeamToggle={handleTeamToggle}
-                logoBgColor={logoBgColor}
-              />
+            <TeamGrid 
+              teams={teams} 
+              selectedTeams={selectedTeams}
+              tradeTeams={tradeTeams}
+              tradeMode={tradeMode}
+              onTeamToggle={handleTeamToggle}
+              logoBgColor={logoBgColor}
+            />
             </div>
 
             {/* Stats Panel */}
@@ -280,6 +308,10 @@ const Index = () => {
           onGradientColor1Change={setGradientColor1}
           gradientColor2={gradientColor2}
           onGradientColor2Change={setGradientColor2}
+          tradeMode={tradeMode}
+          onTradeModeChange={setTradeMode}
+          tradeTeams={tradeTeams}
+          onTradeTeamsReset={() => setTradeTeams([])}
         />
       )}
 

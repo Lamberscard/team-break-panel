@@ -4,11 +4,13 @@ import { cn } from "@/lib/utils";
 interface TeamGridProps {
   teams: Team[];
   selectedTeams: string[];
+  tradeTeams: string[];
+  tradeMode: boolean;
   onTeamToggle: (teamId: string) => void;
   logoBgColor: 'black' | 'white' | 'transparent';
 }
 
-export const TeamGrid = ({ teams, selectedTeams, onTeamToggle, logoBgColor }: TeamGridProps) => {
+export const TeamGrid = ({ teams, selectedTeams, tradeTeams, tradeMode, onTeamToggle, logoBgColor }: TeamGridProps) => {
   const getBgColor = () => {
     switch (logoBgColor) {
       case 'black': return 'rgba(0, 0, 0, 0.7)';
@@ -20,6 +22,7 @@ export const TeamGrid = ({ teams, selectedTeams, onTeamToggle, logoBgColor }: Te
     <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10 xl:grid-cols-12 gap-1 p-2 h-full content-center">
       {teams.map((team) => {
         const isSelected = selectedTeams.includes(team.id);
+        const isTradeAvailable = tradeTeams.includes(team.id);
         return (
           <div key={team.id} className="flex flex-col items-center gap-0.5">
             <button
@@ -30,10 +33,11 @@ export const TeamGrid = ({ teams, selectedTeams, onTeamToggle, logoBgColor }: Te
                 "border-2 hover:scale-[1.03] active:scale-95",
                 isSelected 
                   ? "opacity-40 grayscale" 
-                  : "opacity-100 hover:animate-glow-pulse"
+                  : "opacity-100 hover:animate-glow-pulse",
+                isTradeAvailable && "animate-trade-glow"
               )}
               style={{
-                borderColor: team.color,
+                borderColor: isTradeAvailable ? '#fbbf24' : team.color,
                 backgroundColor: getBgColor(),
                 borderWidth: '2px'
               }}
