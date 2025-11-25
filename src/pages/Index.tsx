@@ -44,7 +44,7 @@ const Index = () => {
 
   const [logoBgColor, setLogoBgColor] = useState<'black' | 'white' | 'transparent'>(() => {
     const saved = localStorage.getItem('logoBgColor');
-    return (saved as 'black' | 'white' | 'transparent') || 'black';
+    return (saved as 'black' | 'white' | 'transparent') || 'transparent';
   });
 
   const [bgColor, setBgColor] = useState<string>(() => {
@@ -243,8 +243,8 @@ const Index = () => {
             />
             </div>
 
-            {/* Stats Panel */}
-            <div className={obsMode ? "bg-card relative" : "bg-card border-t-2 relative"} style={!obsMode ? { borderColor: borderColor } : {}}>
+            {/* Stats Panel - Hidden on mobile */}
+            <div className={obsMode ? "bg-card relative hidden md:block" : "bg-card border-t-2 relative hidden md:block"} style={!obsMode ? { borderColor: borderColor } : {}}>
               <StatsPanel
                 totalTeams={teams.length}
                 soldTeams={selectedTeams.length}
