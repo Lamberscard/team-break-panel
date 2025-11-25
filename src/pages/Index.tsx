@@ -249,6 +249,8 @@ const Index = () => {
                 totalTeams={teams.length}
                 soldTeams={selectedTeams.length}
                 customPanels={customPanels}
+                tradeMode={tradeMode}
+                onTradeModeToggle={() => setTradeMode(!tradeMode)}
               />
               
               {/* Lamberscard & Whatnot Branding */}
