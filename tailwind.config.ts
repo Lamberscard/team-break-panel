@@ -165,7 +165,7 @@ export default {
         "float-fast": "float-fast 10s ease-in-out infinite",
         "float-delayed": "float-delayed 18s ease-in-out infinite 3s",
         "spin": "spin 20s linear infinite",
-        "trade-glow": "trade-glow 3s ease-in-out infinite",
+        "trade-glow": "trade-glow 5s ease-in-out infinite",
       },
     },
   },
