@@ -222,11 +222,11 @@ const Index = () => {
       {showAnimation && <AnimatedBackground intensity={animationIntensity} showSmoothElements={showSmoothElements} gradientColor1={gradientColor1} gradientColor2={gradientColor2} />}
       
       {/* Main Content - 16:9 aspect ratio */}
-      <div className={obsMode ? "w-full h-screen relative z-10" : "w-full h-screen flex items-center justify-center p-2 relative z-10"}>
+      <div className={obsMode ? "w-full h-screen relative z-10" : "w-full h-screen flex items-center justify-center p-1 relative z-10"}>
         <div 
           className={obsMode 
             ? `w-full h-full ${gridBgColor === 'transparent' || gridBgColor.startsWith('rgba') ? 'bg-transparent' : 'bg-card/95'} ${gridBgColor === 'transparent' ? '' : 'backdrop-blur-sm'}` 
-            : `w-full max-w-[98vw] aspect-video ${gridBgColor === 'transparent' || gridBgColor.startsWith('rgba') ? 'bg-transparent' : 'bg-card/95'} ${gridBgColor === 'transparent' ? '' : 'backdrop-blur-sm'} rounded-lg shadow-2xl overflow-hidden border-2`
+            : `w-full h-[98vh] aspect-video ${gridBgColor === 'transparent' || gridBgColor.startsWith('rgba') ? 'bg-transparent' : 'bg-card/95'} ${gridBgColor === 'transparent' ? '' : 'backdrop-blur-sm'} rounded-lg shadow-2xl overflow-hidden border-2`
           }
           style={!obsMode ? { borderColor: borderColor } : {}}
         >
