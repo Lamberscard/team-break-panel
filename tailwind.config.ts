@@ -138,20 +138,30 @@ export default {
           },
         },
         "trade-glow": {
-          "0%": { 
-            boxShadow: "0 -8px 20px 0px rgba(251, 191, 36, 0.8), 8px 0 0px 0px rgba(251, 191, 36, 0), 0 8px 0px 0px rgba(251, 191, 36, 0), -8px 0 0px 0px rgba(251, 191, 36, 0)",
-          },
-          "25%": { 
-            boxShadow: "0 -8px 0px 0px rgba(251, 191, 36, 0), 8px 0 20px 0px rgba(251, 191, 36, 0.8), 0 8px 0px 0px rgba(251, 191, 36, 0), -8px 0 0px 0px rgba(251, 191, 36, 0)",
+          "0%, 100%": { 
+            boxShadow: "0 0 20px 2px rgba(251, 191, 36, 0.4), 0 0 40px 4px rgba(251, 191, 36, 0.2)",
+            borderColor: "rgba(251, 191, 36, 0.6)"
           },
           "50%": { 
-            boxShadow: "0 -8px 0px 0px rgba(251, 191, 36, 0), 8px 0 0px 0px rgba(251, 191, 36, 0), 0 8px 20px 0px rgba(251, 191, 36, 0.8), -8px 0 0px 0px rgba(251, 191, 36, 0)",
+            boxShadow: "0 0 30px 4px rgba(251, 191, 36, 0.6), 0 0 60px 8px rgba(251, 191, 36, 0.3)",
+            borderColor: "rgba(251, 191, 36, 1)"
+          },
+        },
+        "border-rotate": {
+          "0%": { 
+            borderImage: "linear-gradient(0deg, rgba(251, 191, 36, 1) 0%, rgba(251, 191, 36, 0.3) 50%, rgba(251, 191, 36, 0) 100%) 1"
+          },
+          "25%": { 
+            borderImage: "linear-gradient(90deg, rgba(251, 191, 36, 1) 0%, rgba(251, 191, 36, 0.3) 50%, rgba(251, 191, 36, 0) 100%) 1"
+          },
+          "50%": { 
+            borderImage: "linear-gradient(180deg, rgba(251, 191, 36, 1) 0%, rgba(251, 191, 36, 0.3) 50%, rgba(251, 191, 36, 0) 100%) 1"
           },
           "75%": { 
-            boxShadow: "0 -8px 0px 0px rgba(251, 191, 36, 0), 8px 0 0px 0px rgba(251, 191, 36, 0), 0 8px 0px 0px rgba(251, 191, 36, 0), -8px 0 20px 0px rgba(251, 191, 36, 0.8)",
+            borderImage: "linear-gradient(270deg, rgba(251, 191, 36, 1) 0%, rgba(251, 191, 36, 0.3) 50%, rgba(251, 191, 36, 0) 100%) 1"
           },
           "100%": { 
-            boxShadow: "0 -8px 20px 0px rgba(251, 191, 36, 0.8), 8px 0 0px 0px rgba(251, 191, 36, 0), 0 8px 0px 0px rgba(251, 191, 36, 0), -8px 0 0px 0px rgba(251, 191, 36, 0)",
+            borderImage: "linear-gradient(360deg, rgba(251, 191, 36, 1) 0%, rgba(251, 191, 36, 0.3) 50%, rgba(251, 191, 36, 0) 100%) 1"
           },
         },
       },
@@ -165,7 +175,8 @@ export default {
         "float-fast": "float-fast 10s ease-in-out infinite",
         "float-delayed": "float-delayed 18s ease-in-out infinite 3s",
         "spin": "spin 20s linear infinite",
-        "trade-glow": "trade-glow 4s linear infinite",
+        "trade-glow": "trade-glow 2.5s ease-in-out infinite",
+        "border-rotate": "border-rotate 3s linear infinite",
       },
     },
   },
