@@ -88,6 +88,10 @@ interface AdminPanelProps {
   onGradientColor1Change: (color: string) => void;
   gradientColor2: string;
   onGradientColor2Change: (color: string) => void;
+  tradeMode: boolean;
+  onTradeModeChange: (enabled: boolean) => void;
+  tradeTeams: string[];
+  onTradeTeamsReset: () => void;
 }
 
 export const AdminPanel = ({
@@ -118,6 +122,10 @@ export const AdminPanel = ({
   onGradientColor1Change,
   gradientColor2,
   onGradientColor2Change,
+  tradeMode,
+  onTradeModeChange,
+  tradeTeams,
+  onTradeTeamsReset,
 }: AdminPanelProps) => {
   const [editingTeam, setEditingTeam] = useState<Team | null>(null);
   const [newTeam, setNewTeam] = useState({ name: "", logo: "", color: "#000000" });
@@ -188,6 +196,31 @@ export const AdminPanel = ({
               onCheckedChange={onObsModeChange}
             />
           </div>
+
+          {/* Trade Mode */}
+          <div className="flex items-center justify-between p-4 border rounded-lg bg-amber-500/10">
+            <div className="space-y-0.5">
+              <Label className="text-amber-600 dark:text-amber-400">Mode Échange / Trade</Label>
+              <p className="text-sm text-muted-foreground">Cliquez sur les équipes disponibles pour l'échange</p>
+            </div>
+            <Switch
+              checked={tradeMode}
+              onCheckedChange={onTradeModeChange}
+            />
+          </div>
+
+          {tradeMode && tradeTeams.length > 0 && (
+            <div className="p-4 border rounded-lg bg-amber-500/5">
+              <Button 
+                onClick={onTradeTeamsReset}
+                variant="outline"
+                size="sm"
+                className="w-full"
+              >
+                Réinitialiser les équipes en échange ({tradeTeams.length})
+              </Button>
+            </div>
+          )}
 
           {/* Sport Selection */}
           <div className="space-y-2">
