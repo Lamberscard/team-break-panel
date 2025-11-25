@@ -138,11 +138,20 @@ export default {
           },
         },
         "trade-glow": {
-          "0%, 100%": { 
-            boxShadow: "0 0 10px 2px rgba(251, 191, 36, 0.5), 0 0 20px 4px rgba(251, 191, 36, 0.3)",
+          "0%": { 
+            boxShadow: "0 0 15px 3px rgba(251, 191, 36, 0.6), inset 0 0 15px 2px rgba(251, 191, 36, 0.2)",
+          },
+          "25%": { 
+            boxShadow: "15px 0 15px -3px rgba(251, 191, 36, 0.6), inset 0 0 15px 2px rgba(251, 191, 36, 0.2)",
           },
           "50%": { 
-            boxShadow: "0 0 20px 4px rgba(251, 191, 36, 0.8), 0 0 30px 6px rgba(251, 191, 36, 0.5)",
+            boxShadow: "0 15px 15px -3px rgba(251, 191, 36, 0.6), inset 0 0 15px 2px rgba(251, 191, 36, 0.2)",
+          },
+          "75%": { 
+            boxShadow: "-15px 0 15px -3px rgba(251, 191, 36, 0.6), inset 0 0 15px 2px rgba(251, 191, 36, 0.2)",
+          },
+          "100%": { 
+            boxShadow: "0 0 15px 3px rgba(251, 191, 36, 0.6), inset 0 0 15px 2px rgba(251, 191, 36, 0.2)",
           },
         },
       },
@@ -156,7 +165,7 @@ export default {
         "float-fast": "float-fast 10s ease-in-out infinite",
         "float-delayed": "float-delayed 18s ease-in-out infinite 3s",
         "spin": "spin 20s linear infinite",
-        "trade-glow": "trade-glow 2s ease-in-out infinite",
+        "trade-glow": "trade-glow 3s ease-in-out infinite",
       },
     },
   },
