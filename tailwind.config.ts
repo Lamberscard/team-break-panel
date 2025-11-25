@@ -139,19 +139,19 @@ export default {
         },
         "trade-glow": {
           "0%": { 
-            boxShadow: "0 0 15px 3px rgba(251, 191, 36, 0.6), inset 0 0 15px 2px rgba(251, 191, 36, 0.2)",
+            boxShadow: "0 -8px 20px 0px rgba(251, 191, 36, 0.8), 8px 0 0px 0px rgba(251, 191, 36, 0), 0 8px 0px 0px rgba(251, 191, 36, 0), -8px 0 0px 0px rgba(251, 191, 36, 0)",
           },
           "25%": { 
-            boxShadow: "15px 0 15px -3px rgba(251, 191, 36, 0.6), inset 0 0 15px 2px rgba(251, 191, 36, 0.2)",
+            boxShadow: "0 -8px 0px 0px rgba(251, 191, 36, 0), 8px 0 20px 0px rgba(251, 191, 36, 0.8), 0 8px 0px 0px rgba(251, 191, 36, 0), -8px 0 0px 0px rgba(251, 191, 36, 0)",
           },
           "50%": { 
-            boxShadow: "0 15px 15px -3px rgba(251, 191, 36, 0.6), inset 0 0 15px 2px rgba(251, 191, 36, 0.2)",
+            boxShadow: "0 -8px 0px 0px rgba(251, 191, 36, 0), 8px 0 0px 0px rgba(251, 191, 36, 0), 0 8px 20px 0px rgba(251, 191, 36, 0.8), -8px 0 0px 0px rgba(251, 191, 36, 0)",
           },
           "75%": { 
-            boxShadow: "-15px 0 15px -3px rgba(251, 191, 36, 0.6), inset 0 0 15px 2px rgba(251, 191, 36, 0.2)",
+            boxShadow: "0 -8px 0px 0px rgba(251, 191, 36, 0), 8px 0 0px 0px rgba(251, 191, 36, 0), 0 8px 0px 0px rgba(251, 191, 36, 0), -8px 0 20px 0px rgba(251, 191, 36, 0.8)",
           },
           "100%": { 
-            boxShadow: "0 0 15px 3px rgba(251, 191, 36, 0.6), inset 0 0 15px 2px rgba(251, 191, 36, 0.2)",
+            boxShadow: "0 -8px 20px 0px rgba(251, 191, 36, 0.8), 8px 0 0px 0px rgba(251, 191, 36, 0), 0 8px 0px 0px rgba(251, 191, 36, 0), -8px 0 0px 0px rgba(251, 191, 36, 0)",
           },
         },
       },
@@ -165,7 +165,7 @@ export default {
         "float-fast": "float-fast 10s ease-in-out infinite",
         "float-delayed": "float-delayed 18s ease-in-out infinite 3s",
         "spin": "spin 20s linear infinite",
-        "trade-glow": "trade-glow 5s ease-in-out infinite",
+        "trade-glow": "trade-glow 4s linear infinite",
       },
     },
   },
