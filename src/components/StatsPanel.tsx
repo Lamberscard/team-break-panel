@@ -12,7 +12,7 @@ export const StatsPanel = ({ totalTeams, soldTeams, customPanels, tradeMode, onT
   const remaining = totalTeams - soldTeams;
 
   return (
-    <div className="flex flex-row gap-2 p-2 items-center justify-center">
+    <div className="flex flex-row gap-2 p-1.5 items-center justify-center">
       <div className="flex gap-2">
         <StatCard
           label="REMAINING"

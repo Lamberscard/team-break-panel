@@ -19,7 +19,7 @@ export const TeamGrid = ({ teams, selectedTeams, tradeTeams, tradeMode, onTeamTo
     }
   };
   return (
-    <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10 xl:grid-cols-12 gap-1 p-2 h-full content-center">
+    <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10 xl:grid-cols-12 gap-1 p-1.5 h-full content-start items-start">
       {teams.map((team) => {
         const isSelected = selectedTeams.includes(team.id);
         const isTradeAvailable = tradeTeams.includes(team.id);
