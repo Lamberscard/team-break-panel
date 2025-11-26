@@ -49,7 +49,9 @@ export const TeamGrid = ({ teams, selectedTeams, tradeTeams, tradeMode, onTeamTo
               />
               {isSelected && (
                 <div className="absolute inset-0 flex items-center justify-center bg-black/70">
-                  <span className="text-2xl font-bold text-red-500">✗</span>
+                  <span className="text-xs sm:text-sm font-bold text-white/80 text-center px-1 leading-tight">
+                    {team.name}
+                  </span>
                 </div>
               )}
             </button>
