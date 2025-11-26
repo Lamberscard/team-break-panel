@@ -24,24 +24,23 @@ export const TeamGrid = ({ teams, selectedTeams, tradeTeams, tradeMode, onTeamTo
         const isSelected = selectedTeams.includes(team.id);
         const isTradeAvailable = tradeTeams.includes(team.id);
         return (
-          <div key={team.id} className="flex flex-col items-center gap-0">
-            <button
-              onClick={() => onTeamToggle(team.id)}
-              className={cn(
-                "relative aspect-square rounded-md overflow-hidden transition-all duration-300 ease-in-out w-full",
-                "flex items-center justify-center p-0.5",
-                "border-2 hover:scale-[1.03] active:scale-95",
-                isSelected 
-                  ? "opacity-40 grayscale" 
-                  : "opacity-100 hover:animate-glow-pulse",
-                isTradeAvailable && "animate-trade-glow"
-              )}
-              style={{
-                borderColor: isTradeAvailable ? '#fbbf24' : team.color,
-                backgroundColor: getBgColor(),
-                borderWidth: '2px'
-              }}
-            >
+          <button
+            key={team.id}
+            onClick={() => onTeamToggle(team.id)}
+            className={cn(
+              "relative aspect-square rounded-lg overflow-hidden transition-all duration-300 ease-in-out w-full",
+              "flex items-center justify-center p-0.5",
+              "border backdrop-blur-sm hover:scale-[1.03] active:scale-95",
+              "shadow-sm hover:shadow-md",
+              isSelected 
+                ? "opacity-40 grayscale border-white/20" 
+                : "opacity-100 hover:animate-glow-pulse border-white/30",
+              isTradeAvailable && "animate-trade-glow !border-amber-400/60"
+            )}
+            style={{
+              backgroundColor: getBgColor()
+            }}
+          >
               <img
                 src={team.logo}
                 alt={team.name}
@@ -54,11 +53,7 @@ export const TeamGrid = ({ teams, selectedTeams, tradeTeams, tradeMode, onTeamTo
                   </span>
                 </div>
               )}
-            </button>
-            <span className="text-[0.4rem] sm:text-[0.5rem] text-center text-foreground font-semibold leading-none px-0.5 line-clamp-1 mt-0.5">
-              {team.name}
-            </span>
-          </div>
+          </button>
         );
       })}
     </div>
