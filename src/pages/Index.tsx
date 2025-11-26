@@ -232,7 +232,7 @@ const Index = () => {
         >
           <div className="h-full flex flex-col relative">
             {/* Team Grid */}
-            <div className="flex-1 overflow-hidden" style={{ backgroundColor: gridBgColor }}>
+            <div className="flex-1 overflow-y-auto" style={{ backgroundColor: gridBgColor }}>
             <TeamGrid 
               teams={teams} 
               selectedTeams={selectedTeams}
