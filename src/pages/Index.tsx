@@ -226,9 +226,8 @@ const Index = () => {
         <div 
           className={obsMode 
             ? `w-full h-full ${gridBgColor === 'transparent' || gridBgColor.startsWith('rgba') ? 'bg-transparent' : 'bg-card/95'} ${gridBgColor === 'transparent' ? '' : 'backdrop-blur-sm'}` 
-            : `w-full max-h-[99vh] aspect-video ${gridBgColor === 'transparent' || gridBgColor.startsWith('rgba') ? 'bg-transparent' : 'bg-card/95'} ${gridBgColor === 'transparent' ? '' : 'backdrop-blur-sm'} rounded-lg shadow-2xl overflow-hidden border-2`
+            : `w-full max-h-[99vh] aspect-video ${gridBgColor === 'transparent' || gridBgColor.startsWith('rgba') ? 'bg-transparent' : 'bg-card/95'} ${gridBgColor === 'transparent' ? '' : 'backdrop-blur-sm'} rounded-lg shadow-2xl overflow-hidden`
           }
-          style={!obsMode ? { borderColor: borderColor } : {}}
         >
           <div className="h-full flex flex-col relative">
             {/* Team Grid */}
