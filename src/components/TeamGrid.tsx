@@ -28,7 +28,7 @@ export const TeamGrid = ({ teams, selectedTeams, tradeTeams, tradeMode, onTeamTo
             key={team.id}
             onClick={() => onTeamToggle(team.id)}
             className={cn(
-              "relative aspect-square rounded-lg overflow-hidden transition-all duration-300 ease-in-out w-full",
+              "relative aspect-square rounded-lg overflow-hidden transition-all duration-300 ease-in-out w-full group",
               "flex items-center justify-center p-0.5",
               "border backdrop-blur-sm hover:scale-[1.03] active:scale-95",
               "shadow-sm hover:shadow-md",
@@ -41,18 +41,25 @@ export const TeamGrid = ({ teams, selectedTeams, tradeTeams, tradeMode, onTeamTo
               backgroundColor: getBgColor()
             }}
           >
-              <img
-                src={team.logo}
-                alt={team.name}
-                className="w-full h-full object-contain"
-              />
-              {isSelected && (
-                <div className="absolute inset-0 flex items-center justify-center bg-black/70">
-                  <span className="text-xs sm:text-sm font-bold text-white/80 text-center px-1 leading-tight">
-                    {team.name}
-                  </span>
-                </div>
-              )}
+            <img
+              src={team.logo}
+              alt={team.name}
+              className="w-full h-full object-contain"
+            />
+            {isSelected && (
+              <div className="absolute inset-0 flex items-center justify-center bg-black/70">
+                <span className="text-sm sm:text-base font-bold text-white/90 text-center px-2 leading-tight">
+                  {team.name}
+                </span>
+              </div>
+            )}
+            {!isSelected && (
+              <div className="absolute inset-0 flex items-center justify-center bg-black/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <span className="text-sm sm:text-base font-bold text-white/90 text-center px-2 leading-tight">
+                  {team.name}
+                </span>
+              </div>
+            )}
           </button>
         );
       })}
